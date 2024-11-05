@@ -37,6 +37,7 @@ lib.makeOverridable ({
     sof-firmware
     wireless-regdb
   ],
+  platformFirmware ? [ ],
   extraFirmware ? [ ],
   profiles ? { },
   ...
@@ -69,7 +70,7 @@ let
     
     forceConfig = {
       MODULES = false;
-      EXTRA_FIRMWARE = extraFirmware;
+      EXTRA_FIRMWARE = platformFirmware ++ extraFirmware |> lib.unique;
       EXTRA_FIRMWARE_DIR = kernel.option firmwareEnv;
     };
 
