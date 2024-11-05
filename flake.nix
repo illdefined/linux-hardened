@@ -13,7 +13,8 @@
 
   outputs = { self, nixpkgs, ... }@inputs: let
     inherit (nixpkgs) lib;
-    packageWith = pkgs: lib.callPackageWith pkgs ./package.nix;
+    packageWith = pkgs: args: pkgs.callPackage ./package.nix
+      (if builtins.isPath args then import args else args);
   in {
     lib.kernel = import ./lib.nix { inherit lib; };
     packages = {
@@ -33,6 +34,7 @@
         package = packageWith nixpkgs.legacyPackages.x86_64-linux;
       in {
         default = package { };
+        thinkpad-x1-extreme-gen5 = package ./platform/thinkpad-x1-extreme-gen5.nix;
       };
     };
 
