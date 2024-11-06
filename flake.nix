@@ -34,6 +34,7 @@
         package = packageWith nixpkgs.legacyPackages.x86_64-linux;
       in {
         default = package { };
+        supermicro-h11ssw = package ./platform/supermicro-h11ssw.nix;
         thinkpad-x1-extreme-gen5 = package ./platform/thinkpad-x1-extreme-gen5.nix;
       };
     };
