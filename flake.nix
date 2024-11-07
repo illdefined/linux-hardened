@@ -39,6 +39,15 @@
       };
     };
 
+    devShells = lib.genAttrs [ "riscv64-linux" "aarch64-linux" "x86_64-linux" ] (system: {
+      default = let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in pkgs.mkShell {
+        packages = with pkgs; [ pkg-config ncurses.dev bison ];
+        inputsFrom = [ self.packages.${system}.default ];
+      };
+    });
+
     hydraJobs = self.packages |> lib.foldlAttrs (jobs: system: packages: lib.recursiveUpdate jobs
       (lib.mapAttrs (name: package: { ${system} = package; }) packages)) { };
   };
