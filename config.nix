@@ -225,7 +225,7 @@
     PCSPKR_PLATFORM = false;
     FUTEX = true;
     EPOLL = true;
-    AIO = false;
+    AIO = true;
     IO_URING = true;
     ADVISE_SYSCALLS = true;
 
