@@ -1,6 +1,6 @@
 {
   instSetArch = "alderlake";
-  profiles = {
+  platformProfiles = {
     physical = true;
     portable = true;
     wireless = true;

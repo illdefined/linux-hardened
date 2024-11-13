@@ -39,7 +39,8 @@ lib.makeOverridable ({
   ],
   platformFirmware ? [ ],
   extraFirmware ? [ ],
-  profiles ? { },
+  platformProfiles ? { },
+  extraProfiles ? { },
   ...
 }:
 
@@ -61,7 +62,9 @@ let
   } + "/lib/firmware";
 
   config = let
-    profileConfigs = builtins.readDir ./profile
+    profileConfigs = let
+      profiles = platformProfiles // extraProfiles;
+    in builtins.readDir ./profile
     |> lib.filterAttrs (name: type: type == "regular")
     |> builtins.attrNames
     |> map (lib.removeSuffix ".nix")
