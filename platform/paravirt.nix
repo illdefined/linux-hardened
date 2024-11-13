@@ -1,0 +1,5 @@
+{
+  platformProfiles = {
+    paravirt = true;
+  };
+}

@@ -22,18 +22,21 @@
         package = packageWith nixpkgs.legacyPackages.riscv64-linux;
       in {
         default = package { };
+        paravirt = package ./platform/paravirt.nix;
       };
 
       aarch64-linux = let
         package = packageWith nixpkgs.legacyPackages.aarch64-linux;
       in {
         default = package { };
+        paravirt = package ./platform/paravirt.nix;
       };
 
       x86_64-linux = let
         package = packageWith nixpkgs.legacyPackages.x86_64-linux;
       in {
         default = package { };
+        paravirt = package ./platform/paravirt.nix;
         supermicro-h11ssw = package ./platform/supermicro-h11ssw.nix;
         thinkpad-x1-extreme-gen5 = package ./platform/thinkpad-x1-extreme-gen5.nix;
       };
