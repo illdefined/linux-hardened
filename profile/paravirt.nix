@@ -1,12 +1,5 @@
 { option, lib, hostPlatform }: {
-  HYPERVISOR_GUEST = true;
   PARAVIRT = true;
-  PARAVIRT_SPINLOCKS = true;
-  KVM_GUEST = true;
-  ARCH_CPUIDLE_HALTPOLL = true;
-  PARAVIRT_CLOCK = true;
-
-  HALTPOLL_CPUIDLE = true;
 
   FW_CFG_SYSFS = true;
 
@@ -38,4 +31,11 @@
 
   FUSE_FS = true;
   VIRTIO_FS = true;
+} // lib.optionalAttrs hostPlatform.isx86 {
+  HYPERVISOR_GUEST = true;
+  PARAVIRT_SPINLOCKS = true;
+  KVM_GUEST = true;
+  PARAVIRT_CLOCK = true;
+
+  HALTPOLL_CPUIDLE = true;
 }
