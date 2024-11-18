@@ -12,6 +12,7 @@
   sof-firmware,
   wireless-regdb,
 
+  pkg-config,
   jq,
   python3,
   perl,
@@ -101,6 +102,8 @@ in stdenv.mkDerivation (finalAttrs: {
   };
 
   depsBuildBuild = [
+    pkg-config
+
     jq
 
     flex
