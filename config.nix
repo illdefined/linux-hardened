@@ -143,6 +143,9 @@
     COMPAT_BRK = false;
     INIT_ON_FREE_DEFAULT_ON = true;
 
+    # Zero call‐used registers
+    ZERO_CALL_USED_REGS = true;
+
     # False positives in combination with panic on BUG()
     PAGE_SANITIZE_VERIFY = false;
     SLAB_SANITIZE_VERIFY = false;
