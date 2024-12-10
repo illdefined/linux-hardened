@@ -324,9 +324,9 @@
       SWAP = true;
       ZSMALLOC = true;
       ZRAM = true;
+      ZRAM_BACKEND_ZSTD = true;
       ZRAM_DEF_COMP_ZSTD = true;
       ZRAM_WRITEBACK = true;
-      CRYPTO_ZSTD = true;
     };
   } // lib.optionalAttrs hostPlatform.isx86_64 {
     AMD_NUMA = option false;

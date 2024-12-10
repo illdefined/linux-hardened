@@ -88,7 +88,6 @@
     SND_SOC_SOF_TOPLEVEL = true;
     SND_SOC_SOF_PCI = true;
     SND_SOC_SOF_INTEL_TOPLEVEL = true;
-    SND_SOC_SOF_TIGERLAKE = true;
     SND_SOC_SOF_HDA_LINK = true;
     SND_SOC_SOF_HDA_AUDIO_CODEC = true;
     SND_SOC_DMIC = true;
