@@ -1,43 +1,23 @@
 {
   lib,
   stdenv,
-  buildPackages,
-  llvmPackages_19,
-  hostPlatform,
+  pkgsBuildBuild,
+  pkgsBuildTarget,
+  pkgsHostHost,
   fetchFromGitHub,
-  buildEnv,
-  callPackage,
-
-  linux-firmware,
-  sof-firmware,
-  wireless-regdb,
-
-  pkg-config,
-  jq,
-  python3,
-  perl,
-  flex,
-  bison,
-  bc,
-  openssl,
-  zstd,
-  hexdump,
-
-  elfutils,
-  kmod,
   ...
 }@args:
 
 lib.makeOverridable ({
-  llvmPackages ? llvmPackages_19,
-  instSetArch ? hostPlatform.gccarch or null,
+  llvmPackages ? pkgsBuildTarget.llvmPackages_latest,
+  instSetArch ? pkgsBuildTarget.stdenv.hostPlatform.gccarch or null,
   platformConfig ? { },
   extraConfig ? { },
-  firmwarePackages ? [
+  firmwarePackages ? (with pkgsHostHost; [
     linux-firmware
     sof-firmware
     wireless-regdb
-  ],
+  ]),
   platformFirmware ? [ ],
   extraFirmware ? [ ],
   platformProfiles ? { },
@@ -56,7 +36,9 @@ let
   inherit (lib.strings)
     concatStringsSep;
 
-  firmwareEnv = buildEnv {
+  inherit (pkgsBuildTarget.stdenv) hostPlatform;
+
+  firmwareEnv = pkgsBuildTarget.buildEnv {
     name = "linux-firmware";
     pathsToLink = [ "/lib/firmware" ];
     paths = firmwarePackages;
@@ -101,44 +83,54 @@ in stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-hJsLMsR+IidggJQjnkTE6qUIBoI0qOtDiXIMHOKlfbY=";
   };
 
-  depsBuildBuild = [
-    pkg-config
-
-    jq
-
-    flex
-    bison
+  depsBuildBuild = with pkgsBuildBuild; [
     bc
-    python3
-    perl
-    openssl
+    bison
+    flex
     hexdump
-
+    jq
+    openssl
+    perl
+    python3
     zstd
   ];
 
-  nativeBuildInputs = [
+  nativeBuildInputs = with pkgsBuildTarget; [
     elfutils
     kmod
   ];
 
-  makeFlags = [
-    "ARCH:=${hostPlatform.linuxArch}"
+  makeFlags = let
+    exe = pkg: prg: lib.getExe' pkg (pkg.targetPrefix or "" + prg);
+  in [
+    "HOSTCC:=${exe pkgsBuildBuild.stdenv.cc "cc"}"
+    "HOSTCXX:=${exe pkgsBuildBuild.stdenv.cc "c++"}"
+    "HOSTLD:=${exe pkgsBuildBuild.stdenv.cc "ld"}"
+    "HOSTAR:=${exe pkgsBuildBuild.stdenv.cc "ar"}"
 
-    "HOSTCC:=${buildPackages.stdenv.cc}/bin/${buildPackages.stdenv.cc.targetPrefix}cc"
-    "HOSTCXX:=${buildPackages.stdenv.cc}/bin/${buildPackages.stdenv.cc.targetPrefix}c++"
-    "HOSTLD:=${buildPackages.stdenv.cc}/bin/${buildPackages.stdenv.cc.targetPrefix}ld"
-    "HOSTAR:=${buildPackages.stdenv.cc}/bin/${buildPackages.stdenv.cc.targetPrefix}ar"
+    "HOSTPKG_CONFIG:=${lib.getExe pkgsBuildBuild.pkg-config}"
 
-    "CC:=${llvmPackages.clang-unwrapped}/bin/clang"
-    "LD:=${llvmPackages.lld}/bin/ld.lld"
-    "AR:=${llvmPackages.llvm}/bin/llvm-ar"
-    "NM:=${llvmPackages.llvm}/bin/llvm-nm"
-    "OBJCOPY:=${llvmPackages.llvm}/bin/llvm-objcopy"
-    "OBJDUMP:=${llvmPackages.llvm}/bin/llvm-objdump"
-    "READELF:=${llvmPackages.llvm}/bin/llvm-readelf"
-    "STRIP:=${llvmPackages.llvm}/bin/llvm-strip"
+    "CC:=${exe llvmPackages.clang-unwrapped "clang"}"
+    "LD:=${exe llvmPackages.bintools-unwrapped "ld.lld"}"
+    "AR:=${exe llvmPackages.llvm "llvm-ar"}"
+    "NM:=${exe llvmPackages.llvm "llvm-nm"}"
+    "OBJCOPY:=${exe llvmPackages.llvm "llvm-objcopy"}"
+    "OBJDUMP:=${exe llvmPackages.llvm "llvm-objdump"}"
+    "READELF:=${exe llvmPackages.llvm "llvm-readelf"}"
+    "STRIP:=${exe llvmPackages.llvm "llvm-strip"}"
+
+    "PKG_CONFIG:=${lib.getExe pkgsBuildTarget.pkg-config}"
   ];
+
+  env = {
+    ARCH = hostPlatform.linuxArch;
+  } // lib.optionalAttrs (hostPlatform ? linux-kernel.target) {
+    KBUILD_IMAGE = hostPlatform.linux-kernel.target;
+  } // lib.optionalAttrs (instSetArch != null) {
+    KCFLAGS = "-march=${lib.escapeShellArg instSetArch}";
+  };
+
+  inherit platformFirmware extraFirmware;
 
   configfile = config |> kernel.mkConfig;
 
@@ -158,6 +150,17 @@ in stdenv.mkDerivation (finalAttrs: {
   |> filterAttrs (n: v: kernel.isOptional v && kernel.getValue v == false)
   |> mapAttrsToList (n: v: kernel.mkKey n);
 
+  preUnpack = ''
+    # verify firmware file existence
+    for fw in "''${platformFirmware[@]}" "''${extraFirmware[@]}"; do
+      if ! [ -e "${firmwareEnv}/$fw" ]; then
+        printf "Unable to locate firmware file %s in %s.\n" \
+          "$fw" '${firmwareEnv}' >&2
+        exit 1
+      fi
+    done
+  '';
+
   postPatch = ''
     patchShebangs scripts/
 
@@ -171,10 +174,6 @@ in stdenv.mkDerivation (finalAttrs: {
     export KBUILD_OUTPUT="$(pwd)/build"
 
     makeFlags+=( "-j $NIX_BUILD_CORES" )
-  '' + lib.optionalString (hostPlatform ? linux-kernel.target) ''
-    export KBUILD_IMAGE=${lib.escapeShellArg hostPlatform.linux-kernel.target}
-  '' + lib.optionalString (instSetArch != null) ''
-    export KCFLAGS="-march=${lib.escapeShellArg instSetArch}"
   '';
 
   configurePhase = ''
@@ -187,7 +186,7 @@ in stdenv.mkDerivation (finalAttrs: {
   '';
 
   postConfigure = ''
-    # Verify configuration
+    # verify configuration
     for keyValue in "''${requiredPresent[@]}"; do
       if ! grep -F -x -q "$keyValue" build/.config; then
         printf 'Required: %s\nActual:   %s\n\n' "$keyValue" \
@@ -220,7 +219,7 @@ in stdenv.mkDerivation (finalAttrs: {
   '';
 
   preInstall = let
-    installkernel = buildPackages.writeShellScriptBin "installkernel" ''
+    installkernel = pkgsBuildBuild.writeShellScriptBin "installkernel" ''
       cp "$2" "$4"
       cp "$3" "$4"
     '';

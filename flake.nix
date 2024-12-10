@@ -45,9 +45,14 @@
     devShells = lib.genAttrs [ "riscv64-linux" "aarch64-linux" "x86_64-linux" ] (system: {
       default = let
         pkgs = nixpkgs.legacyPackages.${system};
+        kernel = self.packages.${system}.default;
       in pkgs.mkShell {
-        packages = with pkgs; [ pkg-config ncurses.dev bison ];
-        inputsFrom = [ self.packages.${system}.default ];
+        packages = with pkgs.pkgsBuildBuild; [ ncurses ];
+        inputsFrom = [ kernel ];
+
+        env = kernel.env // {
+          MAKEFLAGS = toString kernel.makeFlags;
+        };
       };
     });
 
