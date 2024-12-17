@@ -90,7 +90,7 @@
     SND_SOC_SOF_INTEL_TOPLEVEL = true;
     SND_SOC_SOF_HDA_LINK = true;
     SND_SOC_SOF_HDA_AUDIO_CODEC = true;
-    SND_SOC_DMIC = true;
+    SND_SOC_INTEL_SKL_HDA_DSP_GENERIC_MACH = true;
 
     HID_LENOVO = true;
 
