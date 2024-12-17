@@ -47,8 +47,8 @@
         pkgs = nixpkgs.legacyPackages.${system};
         kernel = self.packages.${system}.default;
       in pkgs.mkShell {
-        packages = with pkgs.pkgsBuildBuild; [ ncurses ];
-        inputsFrom = [ kernel ];
+        packages = (with pkgs.pkgsBuildBuild; [ ncurses ])
+          ++ (with kernel; depsBuildBuild ++ nativeBuildInputs);
 
         env = kernel.env // {
           MAKEFLAGS = toString kernel.makeFlags;
