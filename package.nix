@@ -124,10 +124,13 @@ in stdenv.mkDerivation (finalAttrs: {
 
   env = {
     ARCH = hostPlatform.linuxArch;
+    KCFLAGS = map (flag: [ "-mllvm" flag ]) [
+      "--hot-cold-split"
+      "--hot-cold-static-analysis"
+    ] ++ lib.optionals (instSetArch != null) [ "-march=${lib.escapeShellArg instSetArch}" ]
+    |> toString;
   } // lib.optionalAttrs (hostPlatform ? linux-kernel.target) {
     KBUILD_IMAGE = hostPlatform.linux-kernel.target;
-  } // lib.optionalAttrs (instSetArch != null) {
-    KCFLAGS = "-march=${lib.escapeShellArg instSetArch}";
   };
 
   inherit platformFirmware extraFirmware;
@@ -165,6 +168,8 @@ in stdenv.mkDerivation (finalAttrs: {
     patchShebangs scripts/
 
     sed -i '/select BLOCK_LEGACY_AUTOLOAD/d' drivers/md/Kconfig
+    sed -i 's:\$(filter %\.o,\$\^):& ${lib.getLib llvmPackages.compiler-rt-no-libc}/lib/linux/libclang_rt.builtins-*.a:' \
+      arch/x86/entry/vdso/Makefile
   '';
 
   preConfigure = ''
