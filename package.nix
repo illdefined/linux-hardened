@@ -129,6 +129,16 @@ in stdenv.mkDerivation (finalAttrs: {
 
       "--hot-cold-split"
       "--hot-cold-static-analysis"
+
+      "--polly"
+      "--polly-tiling"
+      "--polly-2nd-level-tiling"
+      "--polly-register-tiling"
+      "--polly-invariant-load-hoisting"
+      "--polly-run-dce"
+      "--polly-run-inliner"
+      "--polly-matmul-opt"
+      "--polly-tc-opt"
     ] ++ lib.optionals (instSetArch != null) [ "-march=${lib.escapeShellArg instSetArch}" ]
     |> toString;
   } // lib.optionalAttrs (hostPlatform ? linux-kernel.target) {
