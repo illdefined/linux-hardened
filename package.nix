@@ -125,6 +125,8 @@ in stdenv.mkDerivation (finalAttrs: {
   env = {
     ARCH = hostPlatform.linuxArch;
     KCFLAGS = map (flag: [ "-mllvm" flag ]) [
+      "--enable-ipra"
+
       "--hot-cold-split"
       "--hot-cold-static-analysis"
     ] ++ lib.optionals (instSetArch != null) [ "-march=${lib.escapeShellArg instSetArch}" ]
