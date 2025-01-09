@@ -125,7 +125,10 @@ in stdenv.mkDerivation (finalAttrs: {
   env = {
     ARCH = hostPlatform.linuxArch;
     KCFLAGS = map (flag: [ "-mllvm" flag ]) [
+      "--enable-deferred-spilling"
+      "--enable-gvn-hoist"
       "--enable-ipra"
+      "--enable-merge-functions"
 
       "--hot-cold-split"
       "--hot-cold-static-analysis"
