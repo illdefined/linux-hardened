@@ -5,6 +5,7 @@
   pkgsBuildTarget,
   pkgsHostHost,
   fetchFromGitHub,
+  nix-update-script,
   ...
 }@args:
 
@@ -282,6 +283,8 @@ in stdenv.mkDerivation (finalAttrs: {
 
     kernelOlder = lib.versionOlder finalAttrs.version;
     kernelAtLeast = lib.versionAtLeast finalAttrs.version;
+
+    updateScript = nix-update-script { };
   };
 
   meta = {
