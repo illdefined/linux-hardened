@@ -23,7 +23,6 @@
       in {
         default = package { };
         paravirt = package ./platform/paravirt.nix;
-        milkv-pioneer = package ./platform/milkv-pioneer.nix;
       };
 
       aarch64-linux = let
