@@ -1,5 +1,5 @@
 {
-  instSetArch = "alderlake";
+  targetArch = "alderlake";
   platformProfiles = {
     physical = true;
     portable = true;

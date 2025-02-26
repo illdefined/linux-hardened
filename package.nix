@@ -11,7 +11,9 @@
 
 lib.makeOverridable ({
   llvmPackages ? pkgsBuildTarget.llvmPackages_latest,
-  instSetArch ? pkgsBuildTarget.stdenv.hostPlatform.gccarch or null,
+  targetCPU ? pkgsBuildTarget.stdenv.hostPlatform.gcc.cpu or null,
+  targetArch ? pkgsBuildTarget.stdenv.hostPlatform.gcc.arch or null,
+  targetTune ? pkgsBuildTarget.stdenv.hostPlatform.gcc.tune or null,
   platformConfig ? { },
   extraConfig ? { },
   firmwarePackages ? (with pkgsHostHost; [
@@ -143,7 +145,9 @@ in stdenv.mkDerivation (finalAttrs: {
       "--polly-run-inliner"
       "--polly-matmul-opt"
       "--polly-tc-opt"
-    ] ++ lib.optionals (instSetArch != null) [ "-march=${lib.escapeShellArg instSetArch}" ]
+    ] ++ lib.optionals (targetCPU != null) [ "-mcpu=${lib.escapeShellArg targetCPU}" ]
+      ++ lib.optionals (targetArch != null) [ "-march=${lib.escapeShellArg targetArch}" ]
+      ++ lib.optionals (targetTune != null) [ "-mtune=${lib.escapeShellArg targetTune}" ]
     |> toString;
   } // lib.optionalAttrs (hostPlatform ? linux-kernel.target) {
     KBUILD_IMAGE = hostPlatform.linux-kernel.target;

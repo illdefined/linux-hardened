@@ -1,5 +1,5 @@
 {
-  instSetArch = "znver2";
+  targetArch = "znver2";
   platformProfiles = {
     physical = true;
   };
