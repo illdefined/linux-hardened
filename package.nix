@@ -86,6 +86,8 @@ in stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-5z16UrCvpRQrmDOeFY+Wnpx3oNM3ukYIgHLJ9rRtYPk=";
   };
 
+  strictDeps = true;
+
   depsBuildBuild = with pkgsBuildBuild; [
     bc
     bison
