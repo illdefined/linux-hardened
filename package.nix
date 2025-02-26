@@ -100,8 +100,11 @@ in stdenv.mkDerivation (finalAttrs: {
     zstd
   ];
 
-  nativeBuildInputs = with pkgsBuildTarget; [
+  buildInputs = with pkgsHostHost; [
     elfutils
+  ];
+
+  nativeBuildInputs = with pkgsBuildTarget; [
     kmod
   ];
 
