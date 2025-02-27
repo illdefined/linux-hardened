@@ -135,6 +135,7 @@ in stdenv.mkDerivation (finalAttrs: {
     KCFLAGS = [
       "-resource-dir=${llvmPackages.clang}/resource-root"
       "--rtlib=compiler-rt"
+      "-Wno-unused-command-line-argument"
     ] ++ lib.optionals (targetCPU != null) [ "-mcpu=${lib.escapeShellArg targetCPU}" ]
       ++ lib.optionals (targetArch != null) [ "-march=${lib.escapeShellArg targetArch}" ]
       ++ lib.optionals (targetTune != null) [ "-mtune=${lib.escapeShellArg targetTune}" ]
