@@ -2,22 +2,18 @@
   lib,
   stdenv,
   pkgsBuildBuild,
-  pkgsBuildTarget,
+  pkgsBuildHost,
   pkgsHostHost,
   fetchFromGitHub,
-  runCommand,
-  runCommandCC,
-  makeBinaryWrapper,
-  writeShellApplication,
   nix-update-script,
   ...
 }@args:
 
 lib.makeOverridable ({
-  llvmPackages ? pkgsBuildTarget.llvmPackages_latest,
-  targetCPU ? pkgsBuildTarget.stdenv.hostPlatform.gcc.cpu or null,
-  targetArch ? pkgsBuildTarget.stdenv.hostPlatform.gcc.arch or null,
-  targetTune ? pkgsBuildTarget.stdenv.hostPlatform.gcc.tune or null,
+  llvmPackages ? pkgsBuildHost.llvmPackages_latest,
+  targetCPU ? stdenv.hostPlatform.gcc.cpu or null,
+  targetArch ? stdenv.hostPlatform.gcc.arch or null,
+  targetTune ? stdenv.hostPlatform.gcc.tune or null,
   platformConfig ? { },
   extraConfig ? { },
   firmwarePackages ? (with pkgsHostHost; [
@@ -44,9 +40,9 @@ let
     concatStringsSep
     escapeShellArg;
 
-  inherit (pkgsBuildTarget.stdenv) hostPlatform;
+  inherit (stdenv) hostPlatform;
 
-  firmwareEnv = pkgsBuildTarget.buildEnv {
+  firmwareEnv = pkgsBuildBuild.buildEnv {
     name = "linux-firmware";
     pathsToLink = [ "/lib/firmware" ];
     paths = firmwarePackages;
@@ -93,24 +89,23 @@ in stdenv.mkDerivation (finalAttrs: {
 
   strictDeps = true;
 
-  depsBuildBuild = with pkgsBuildBuild; [
+  nativeBuildInputs = (with pkgsBuildBuild; [
     bc
-    bison
-    flex
     hexdump
     jq
     openssl
     perl
     python3
     zstd
-  ];
-
-  buildInputs = with pkgsHostHost; [
-    elfutils
-  ];
-
-  nativeBuildInputs = with pkgsBuildTarget; [
+  ]) ++ (with pkgsBuildHost; [
+    bison
+    flex
     kmod
+  ]);
+
+  buildInputs = [
+    pkgsBuildBuild.openssl
+    pkgsBuildHost.elfutils
   ];
 
   makeFlags = let
@@ -119,14 +114,14 @@ in stdenv.mkDerivation (finalAttrs: {
     cc = llvmPackages.clang-unwrapped;
     version = lib.versions.major cc.version;
 
-    resource-dir = runCommand "clang-resources" { } ''
+    resource-dir = pkgsBuildBuild.runCommand "clang-resources" { } ''
       mkdir -p "$out"
       ln -s ${escapeShellArg "${lib.getLib cc}/lib/clang/${version}/include"} "$out"
       ln -s ${escapeShellArg "${lib.getLib llvmPackages.compiler-rt-no-libc}/lib"} "$out"
     '';
 
-    cc-wrapper = runCommandCC "clang" {
-      nativeBuildInputs = [ makeBinaryWrapper ];
+    cc-wrapper = pkgsBuildBuild.runCommandCC "clang" {
+      nativeBuildInputs = [ pkgsBuildBuild.makeBinaryWrapper ];
       meta.mainProgram = "clang";
     } ''
       makeBinaryWrapper "${lib.getExe cc}" "$out/bin/clang" \
@@ -138,12 +133,12 @@ in stdenv.mkDerivation (finalAttrs: {
       rtlib = {
         ${arch} = resource-dir;
       } // lib.optionalAttrs hostPlatform.isx86 {
-        i386 = lib.getLib pkgsBuildTarget.pkgsi686Linux."llvmPackages_${version}".compiler-rt-no-libc;
+        i386 = lib.getLib pkgsBuildHost.pkgsi686Linux."llvmPackages_${version}".compiler-rt-no-libc;
       } |> lib.mapAttrs (arch: resource-dir: [
         "-L${resource-dir}/lib/linux"
         "-lclang_rt.builtins-${arch}"
       ]);
-    in writeShellApplication {
+    in pkgsBuildBuild.writeShellApplication {
       name = "ld.lld";
       text = ''
         declare -a params prefix suffix
@@ -197,7 +192,7 @@ in stdenv.mkDerivation (finalAttrs: {
     "READELF:=${lib.getExe' llvmPackages.llvm "llvm-readelf"}"
     "STRIP:=${lib.getExe' llvmPackages.llvm "llvm-strip"}"
 
-    "PKG_CONFIG:=${lib.getExe pkgsBuildTarget.pkg-config}"
+    "PKG_CONFIG:=${lib.getExe pkgsBuildHost.pkg-config}"
   ];
 
   env = {
