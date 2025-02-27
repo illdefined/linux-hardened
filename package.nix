@@ -5,6 +5,10 @@
   pkgsBuildTarget,
   pkgsHostHost,
   fetchFromGitHub,
+  runCommand,
+  runCommandCC,
+  makeBinaryWrapper,
+  writeShellApplication,
   nix-update-script,
   ...
 }@args:
@@ -37,7 +41,8 @@ let
     mergeAttrsList;
 
   inherit (lib.strings)
-    concatStringsSep;
+    concatStringsSep
+    escapeShellArg;
 
   inherit (pkgsBuildTarget.stdenv) hostPlatform;
 
@@ -110,6 +115,75 @@ in stdenv.mkDerivation (finalAttrs: {
 
   makeFlags = let
     exe = pkg: prg: lib.getExe' pkg (pkg.targetPrefix or "" + prg);
+
+    cc = llvmPackages.clang-unwrapped;
+    version = lib.versions.major cc.version;
+
+    resource-dir = runCommand "clang-resources" { } ''
+      mkdir -p "$out"
+      ln -s ${escapeShellArg "${lib.getLib cc}/lib/clang/${version}/include"} "$out"
+      ln -s ${escapeShellArg "${lib.getLib llvmPackages.compiler-rt-no-libc}/lib"} "$out"
+    '';
+
+    cc-wrapper = runCommandCC "clang" {
+      nativeBuildInputs = [ makeBinaryWrapper ];
+      meta.mainProgram = "clang";
+    } ''
+      makeBinaryWrapper "${lib.getExe cc}" "$out/bin/clang" \
+        --add-flags ${escapeShellArg "-resource-dir=${resource-dir}"}
+    '';
+
+    ld-wrapper = let
+      arch = hostPlatform.uname.processor;
+      rtlib = {
+        ${arch} = resource-dir;
+      } // lib.optionalAttrs hostPlatform.isx86 {
+        i386 = lib.getLib pkgsBuildTarget.pkgsi686Linux."llvmPackages_${version}".compiler-rt-no-libc;
+      } |> lib.mapAttrs (arch: resource-dir: [
+        "-L${resource-dir}/lib/linux"
+        "-lclang_rt.builtins-${arch}"
+      ]);
+    in writeShellApplication {
+      name = "ld.lld";
+      text = ''
+        declare -a params prefix suffix
+
+        while (($# >= 1)); do
+          case "$1" in
+          --relocatable|-i|-r)
+            relocatable=;;
+          --hash-style=*)
+            shift
+            continue;;
+          -m)
+            params+=("$1")
+            target="$2"
+            shift;;
+          esac
+
+          params+=("$1")
+          shift
+        done
+
+        prefix+=(--hash-style=gnu --lto-O2 -O2)
+
+        [[ -v relocatable ]] || prefix+=(--icf=safe)
+
+        if [[ -v target ]]; then
+          arch="''${target#elf_}"
+        else
+          arch=${escapeShellArg arch}
+        fi
+
+        case "$arch" in
+        ${rtlib |> lib.mapAttrsToList (arch: args:
+          "${escapeShellArg arch}) suffix+=(${lib.escapeShellArgs args});;")
+          |> concatStringsSep "\n"}
+        esac
+
+        exec ${lib.getExe' llvmPackages.lld "ld.lld"} "''${prefix[@]}" "''${params[@]}" "''${suffix[@]}"
+      '';
+    };
   in [
     "HOSTCC:=${exe pkgsBuildBuild.stdenv.cc "cc"}"
     "HOSTCXX:=${exe pkgsBuildBuild.stdenv.cc "c++"}"
@@ -118,27 +192,24 @@ in stdenv.mkDerivation (finalAttrs: {
 
     "HOSTPKG_CONFIG:=${lib.getExe pkgsBuildBuild.pkg-config}"
 
-    "CC:=${exe llvmPackages.clang-unwrapped "clang"}"
-    "LD:=${exe llvmPackages.bintools-unwrapped "ld.lld"}"
-    "AR:=${exe llvmPackages.llvm "llvm-ar"}"
-    "NM:=${exe llvmPackages.llvm "llvm-nm"}"
-    "OBJCOPY:=${exe llvmPackages.llvm "llvm-objcopy"}"
-    "OBJDUMP:=${exe llvmPackages.llvm "llvm-objdump"}"
-    "READELF:=${exe llvmPackages.llvm "llvm-readelf"}"
-    "STRIP:=${exe llvmPackages.llvm "llvm-strip"}"
+    "CC:=${lib.getExe cc-wrapper}"
+    "LD:=${lib.getExe ld-wrapper}"
+    "AR:=${lib.getExe' llvmPackages.llvm "llvm-ar"}"
+    "NM:=${lib.getExe' llvmPackages.llvm "llvm-nm"}"
+    "OBJCOPY:=${lib.getExe' llvmPackages.llvm "llvm-objcopy"}"
+    "OBJDUMP:=${lib.getExe' llvmPackages.llvm "llvm-objdump"}"
+    "READELF:=${lib.getExe' llvmPackages.llvm "llvm-readelf"}"
+    "STRIP:=${lib.getExe' llvmPackages.llvm "llvm-strip"}"
 
     "PKG_CONFIG:=${lib.getExe pkgsBuildTarget.pkg-config}"
   ];
 
   env = {
     ARCH = hostPlatform.linuxArch;
-    KCFLAGS = [
-      "-resource-dir=${llvmPackages.clang}/resource-root"
-      "--rtlib=compiler-rt"
-      "-Wno-unused-command-line-argument"
-    ] ++ lib.optionals (targetCPU != null) [ "-mcpu=${lib.escapeShellArg targetCPU}" ]
-      ++ lib.optionals (targetArch != null) [ "-march=${lib.escapeShellArg targetArch}" ]
-      ++ lib.optionals (targetTune != null) [ "-mtune=${lib.escapeShellArg targetTune}" ]
+    KCFLAGS =
+      lib.optionals (targetCPU != null) [ "-mcpu=${targetCPU}" ]
+      ++ lib.optionals (targetArch != null) [ "-march=${targetArch}" ]
+      ++ lib.optionals (targetTune != null) [ "-mtune=${targetTune}" ]
       ++ map (flag: [ "-mllvm" flag ]) [
         "--enable-deferred-spilling"
         "--enable-gvn-hoist"
@@ -193,12 +264,15 @@ in stdenv.mkDerivation (finalAttrs: {
     done
   '';
 
-  postPatch = ''
+  postPatch = let
+    rtlib = lib.getLib llvmPackages.compiler-rt-no-libc;
+  in ''
     patchShebangs scripts/
 
     sed -i '/select BLOCK_LEGACY_AUTOLOAD/d' drivers/md/Kconfig
-    sed -i 's:\$(filter %\.o,\$\^):& ${lib.getLib llvmPackages.compiler-rt-no-libc}/lib/linux/libclang_rt.builtins-*.a:' \
-      arch/x86/entry/vdso/Makefile
+
+    find . -type f -name '*.lds.S' -print0 \
+      | xargs -0 -r sed -E -i '/\<\.hash\>/d'
   '';
 
   preConfigure = ''
