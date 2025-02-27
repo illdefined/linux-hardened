@@ -1,6 +1,4 @@
 { option, lib, hostPlatform }: {
-  PREEMPT_VOLUNTARY = true;
-
   SUSPEND = true;
   WQ_POWER_EFFICIENT_DEFAULT = true;
   ACPI_BATTERY = true;

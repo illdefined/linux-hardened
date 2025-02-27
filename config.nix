@@ -206,7 +206,7 @@
   timer = {
     NO_HZ_FULL = true;
     HIGH_RES_TIMERS = true;
-    HZ_1000 = true;
+    HZ_100 = true;
 
     RTC_CLASS = true;
     RTC_HCTOSYS = true;
