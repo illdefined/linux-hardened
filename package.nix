@@ -150,8 +150,6 @@ in stdenv.mkDerivation (finalAttrs: {
 
         while (($# >= 1)); do
           case "$1" in
-          --relocatable|-i|-r)
-            relocatable=;;
           --hash-style=*)
             shift
             continue;;
@@ -166,8 +164,6 @@ in stdenv.mkDerivation (finalAttrs: {
         done
 
         prefix+=(--hash-style=gnu --lto-O2 -O2)
-
-        [[ -v relocatable ]] || prefix+=(--icf=safe)
 
         if [[ -v target ]]; then
           arch="''${target#elf_}"
