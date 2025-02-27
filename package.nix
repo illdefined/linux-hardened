@@ -197,6 +197,8 @@ in stdenv.mkDerivation (finalAttrs: {
     patchShebangs scripts/
 
     sed -i '/select BLOCK_LEGACY_AUTOLOAD/d' drivers/md/Kconfig
+    sed -i 's:\$(filter %\.o,\$\^):& ${lib.getLib llvmPackages.compiler-rt-no-libc}/lib/linux/libclang_rt.builtins-*.a:' \
+      arch/x86/entry/vdso/Makefile
   '';
 
   preConfigure = ''
