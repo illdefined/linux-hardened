@@ -75,6 +75,10 @@ let
 in stdenv.mkDerivation (finalAttrs: {
   __structuredAttrs = true;
 
+  __contentAddressed = true;
+  outputHashMode = "recursive";
+  outputHashsAlgo = "sha256";
+
   pname = "linux-hardened";
   version = "6.13.1-hardened1";
 
