@@ -276,6 +276,9 @@ in stdenv.mkDerivation (finalAttrs: {
     export KBUILD_BUILD_TIMESTAMP="$(date -u -d @$SOURCE_DATE_EPOCH)"
     export KBUILD_OUTPUT="$(pwd)/build"
 
+    echo ${stdenv.cc.cc.outPath |> builtins.match ".*/([a-z0-9]{32}).*" |> builtins.head} \
+      >scripts/basic/randstruct.seed
+
     makeFlags+=( "-j $NIX_BUILD_CORES" )
   '';
 

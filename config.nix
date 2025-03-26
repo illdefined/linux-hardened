@@ -194,6 +194,8 @@
     LIST_HARDENED = true;
     BUG_ON_DATA_CORRUPTION = true;
 
+    RANDSTRUCT_FULL = true;
+
   } // lib.optionalAttrs hostPlatform.isx86_64 {
     X86_UMIP = true;
     X86_USER_SHADOW_STACK = true;
