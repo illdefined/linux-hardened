@@ -12,6 +12,8 @@
   SCSI_CONSTANTS = true;
   SCSI_SCAN_ASYNC = true;
 
+  I2C_CHARDEV = true;
+
   USB_STORAGE = true;
   USB_UAS = true;
 
