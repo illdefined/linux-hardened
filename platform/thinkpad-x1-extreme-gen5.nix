@@ -28,11 +28,6 @@
     BT_INTEL = true;
     BT_HCIBTUSB = true;
 
-    EISA = true;
-    EISA_PCI_EISA = true;
-    EISA_VIRTUAL_ROOT = false;
-    EISA_NAMES = true;
-
     NVME_CORE = true;
     BLK_DEV_NVME = true;
     NVME_VERBOSE_ERRORS = true;
