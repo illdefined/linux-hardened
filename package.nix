@@ -74,7 +74,6 @@ let
   |> kernel.mergeConfig;
 in stdenv.mkDerivation (finalAttrs: {
   __structuredAttrs = true;
-  __contentAddressed = true;
 
   pname = "linux-hardened";
   version = "6.14.7-hardened1";
