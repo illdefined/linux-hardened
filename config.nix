@@ -54,8 +54,7 @@
 
     SYMBOLIC_ERRNAME = true;
     DEBUG_BUGVERBOSE = true;
-    DEBUG_INFO_DWARF5 = true;
-    DEBUG_INFO_SPLIT = true;
+    DEBUG_INFO_NONE = true;
     STRIP_ASM_SYMS = true;
 
     MAGIC_SYSRQ = true;
