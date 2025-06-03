@@ -275,6 +275,7 @@
     SCHED_SMT = option true;
     SCHED_CORE = option true;
     SCHED_AUTOGROUP = true;
+    SCHED_HW_PRESSURE = option true;
 
     RCU_NOCB_CPU_DEFAULT_ALL = true;
     RCU_LAZY = true;
