@@ -266,6 +266,13 @@
     IA32_EMULATION = false;
   };
 
+  accounting = {
+    TASKSTATS = true;
+    TASK_DELAY_ACCT = true;
+    TASK_XACCT = true;
+    TASK_IO_ACCOUNTING = true;
+  };
+
   scheduler = {
     SMP = true;
     PREEMPT_DYNAMIC = false;
