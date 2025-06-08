@@ -67,6 +67,8 @@
     VGA_SWITCHEROO = true;
     DRM = true;
     DRM_FBDEV_EMULATION = true;
+    DRM_DISPLAY_DP_AUX_CEC = true;
+    DRM_DISPLAY_DP_AUX_CHARDEV = true;
     DRM_I915 = true;
 
     BACKLIGHT_CLASS_DEVICE = true;
