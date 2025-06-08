@@ -108,6 +108,8 @@ in stdenv.mkDerivation (finalAttrs: {
     pkgsBuildHost.elfutils
   ];
 
+  patches = [ ./io_uring-sysctl.patch ];
+
   makeFlags = let
     exe = pkg: prg: lib.getExe' pkg (pkg.targetPrefix or "" + prg);
 
