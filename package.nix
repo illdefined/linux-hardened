@@ -375,5 +375,6 @@ in stdenv.mkDerivation (finalAttrs: {
     license = lib.licenses.gpl2Only;
     maintainers = with lib.maintainers; [ mvs ];
     platforms = [ "riscv64-linux" "aarch64-linux" "x86_64-linux" ];
+    requiredSystemFeatures = [ "big-parallel" ];
   };
 })) args
