@@ -110,6 +110,8 @@ in stdenv.mkDerivation (finalAttrs: {
 
   patches = [ ./io_uring-sysctl.patch ];
 
+  enableParallelBuilding = true;
+
   makeFlags = let
     exe = pkg: prg: lib.getExe' pkg (pkg.targetPrefix or "" + prg);
 
@@ -277,7 +279,9 @@ in stdenv.mkDerivation (finalAttrs: {
     echo ${stdenv.cc.cc.outPath |> builtins.match ".*/([a-z0-9]{32}).*" |> builtins.head} \
       >scripts/basic/randstruct.seed
 
-    makeFlags+=( "-j $NIX_BUILD_CORES" )
+    if [[ -v enableParallelBuilding ]]; then
+      makeFlags+=( -j "$NIX_BUILD_CORES" )
+    fi
   '';
 
   configurePhase = ''
