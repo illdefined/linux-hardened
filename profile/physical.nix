@@ -17,6 +17,7 @@
 
   NEW_LEDS = true;
   LEDS_CLASS = true;
+  LEDS_CLASS_MULTICOLOR = true;
   LEDS_TRIGGERS = true;
   LEDS_TRIGGER_PANIC = true;
   LEDS_TRIGGER_NETDEV = true;
