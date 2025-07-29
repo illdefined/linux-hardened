@@ -57,7 +57,7 @@ let
     |> map (lib.removeSuffix ".nix")
     |> builtins.filter (profile: profiles.${profile} or false)
     |> map (profile: ./profile/${profile}.nix);
-    
+
     forceConfig = {
       MODULES = false;
       EXTRA_FIRMWARE = platformFirmware ++ extraFirmware |> lib.unique;
