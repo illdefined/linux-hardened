@@ -166,6 +166,10 @@
     #UBSAN_BOOL = false;
     #UBSAN_ENUM = false;
 
+    # User page table sanity checks
+    PAGE_TABLE_CHECK = true;
+    PAGE_TABLE_CHECK_ENFORCED = true;
+
     # Memory safety error detection
     KFENCE = true;
     KFENCE_DEFERRABLE = true;
