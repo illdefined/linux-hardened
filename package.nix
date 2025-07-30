@@ -83,7 +83,7 @@ in stdenv.mkDerivation (finalAttrs: {
   src = fetchFromGitHub {
     owner = "anthraxx";
     repo = "linux-hardened";
-    rev = "v${finalAttrs.version}";
+    tag = "v${finalAttrs.version}";
     hash = "sha256-hi0OkBopBD2pHCmDVE9AaqVaZAY0sV+SyFcODIAMHfs=";
   };
 
