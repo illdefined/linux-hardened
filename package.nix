@@ -180,25 +180,25 @@ in stdenv.mkDerivation (finalAttrs: {
         exec ${lib.getExe' llvmPackages.lld "ld.lld"} "''${prefix[@]}" "''${params[@]}" "''${suffix[@]}"
       '';
     };
-  in [
-    "HOSTCC:=${exe pkgsBuildBuild.stdenv.cc "cc"}"
-    "HOSTCXX:=${exe pkgsBuildBuild.stdenv.cc "c++"}"
-    "HOSTLD:=${exe pkgsBuildBuild.stdenv.cc "ld"}"
-    "HOSTAR:=${exe pkgsBuildBuild.stdenv.cc "ar"}"
+  in {
+    HOSTCC = exe pkgsBuildBuild.stdenv.cc "cc";
+    HOSTCXX = exe pkgsBuildBuild.stdenv.cc "c++";
+    HOSTLD = exe pkgsBuildBuild.stdenv.cc "ld";
+    HOSTAR = exe pkgsBuildBuild.stdenv.cc "ar";
 
-    "HOSTPKG_CONFIG:=${lib.getExe pkgsBuildBuild.pkg-config}"
+    HOSTPKG_CONFIG = lib.getExe pkgsBuildBuild.pkg-config;
 
-    "CC:=${lib.getExe cc-wrapper}"
-    "LD:=${lib.getExe ld-wrapper}"
-    "AR:=${lib.getExe' llvmPackages.llvm "llvm-ar"}"
-    "NM:=${lib.getExe' llvmPackages.llvm "llvm-nm"}"
-    "OBJCOPY:=${lib.getExe' llvmPackages.llvm "llvm-objcopy"}"
-    "OBJDUMP:=${lib.getExe' llvmPackages.llvm "llvm-objdump"}"
-    "READELF:=${lib.getExe' llvmPackages.llvm "llvm-readelf"}"
-    "STRIP:=${lib.getExe' llvmPackages.llvm "llvm-strip"}"
+    CC = lib.getExe cc-wrapper;
+    LD = lib.getExe ld-wrapper;
+    AR = lib.getExe' llvmPackages.llvm "llvm-ar";
+    NM = lib.getExe' llvmPackages.llvm "llvm-nm";
+    OBJCOPY = lib.getExe' llvmPackages.llvm "llvm-objcopy";
+    OBJDUMP = lib.getExe' llvmPackages.llvm "llvm-objdump";
+    READELF = lib.getExe' llvmPackages.llvm "llvm-readelf";
+    STRIP = lib.getExe' llvmPackages.llvm "llvm-strip";
 
-    "PKG_CONFIG:=${lib.getExe pkgsBuildHost.pkg-config}"
-  ];
+    PKG_CONFIG = lib.getExe pkgsBuildHost.pkg-config;
+  } |> mapAttrsToList (n: v: "${n}:=${v}");
 
   env = {
     ARCH = hostPlatform.linuxArch;
