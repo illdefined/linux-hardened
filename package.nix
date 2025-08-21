@@ -382,6 +382,7 @@ in stdenv.mkDerivation (finalAttrs: {
     };
 
     isModular = false;
+    withRust = true;
 
     isHardened = true;
     isLibre = false;
