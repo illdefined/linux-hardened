@@ -10,7 +10,7 @@
 }@args:
 
 lib.makeOverridable ({
-  llvmPackages ? pkgsBuildHost.llvmPackages_latest,
+  llvmPackages ? pkgsBuildHost.rustPackages.rustc.llvmPackages,
   targetCPU ? stdenv.hostPlatform.gcc.cpu or null,
   targetArch ? stdenv.hostPlatform.gcc.arch or null,
   targetTune ? stdenv.hostPlatform.gcc.tune or null,
@@ -186,6 +186,8 @@ in stdenv.mkDerivation (finalAttrs: {
     HOSTLD = exe pkgsBuildBuild.stdenv.cc "ld";
     HOSTAR = exe pkgsBuildBuild.stdenv.cc "ar";
 
+    HOSTRUSTC = lib.getExe' pkgsBuildBuild.rustc "rustc";
+
     HOSTPKG_CONFIG = lib.getExe pkgsBuildBuild.pkg-config;
 
     CC = lib.getExe cc-wrapper;
@@ -196,6 +198,13 @@ in stdenv.mkDerivation (finalAttrs: {
     OBJDUMP = lib.getExe' llvmPackages.llvm "llvm-objdump";
     READELF = lib.getExe' llvmPackages.llvm "llvm-readelf";
     STRIP = lib.getExe' llvmPackages.llvm "llvm-strip";
+
+    RUSTC = lib.getExe' pkgsBuildHost.rustPackages.rustc-unwrapped "rustc";
+    RUSTDOC = lib.getExe' pkgsBuildHost.rustPackages.rustc-unwrapped "rustdoc";
+    RUSTFMT = lib.getExe pkgsBuildHost.rustPackages.rustfmt;
+    CLIPPY_DRIVER = lib.getExe' pkgsBuildHost.rustPackages.clippy "clippy-driver";
+    BINDGEN = lib.getExe pkgsBuildHost.rust-bindgen-unwrapped;
+    PAHOLE = lib.getExe' pkgsBuildHost.pahole "pahole";
 
     PKG_CONFIG = lib.getExe pkgsBuildHost.pkg-config;
   } |> mapAttrsToList (n: v: "${n}:=${v}");
@@ -225,6 +234,13 @@ in stdenv.mkDerivation (finalAttrs: {
         "--polly-matmul-opt"
         "--polly-tc-opt"
     ] |> toString;
+
+    KRUSTFLAGS = [
+      "--remap-path-prefix" "${pkgsBuildHost.rustPlatform.rustLibSrc}=/"
+    ] |> toString;
+
+    LIBCLANG_PATH = lib.getLib llvmPackages.libclang + "/lib";
+    RUST_LIB_SRC = pkgsBuildHost.rustPlatform.rustLibSrc;
   } // lib.optionalAttrs (hostPlatform ? linux-kernel.target) {
     KBUILD_IMAGE = hostPlatform.linux-kernel.target;
   };

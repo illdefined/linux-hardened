@@ -10,6 +10,8 @@
     COMPILE_TEST = false;
     WERROR = true;
 
+    RUST = true;
+
     STANDALONE = true;
     PREVENT_FIRMWARE_BUILD = true;
 
@@ -196,8 +198,6 @@
 
     LIST_HARDENED = true;
     BUG_ON_DATA_CORRUPTION = true;
-
-    RANDSTRUCT_FULL = true;
 
   } // lib.optionalAttrs hostPlatform.isx86_64 {
     X86_UMIP = true;
