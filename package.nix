@@ -33,6 +33,7 @@ let
 
   inherit (lib.attrsets)
     filterAttrs
+    hasAttr
     mapAttrsToList
     mergeAttrsList;
 
@@ -352,8 +353,12 @@ in stdenv.mkDerivation (finalAttrs: {
 
   passthru = {
     config = with kernel; {
-      isYes = option: getValue config.${option} or false == true;
-      isNo = option: getValue config.${option} or false == false;
+      isSet = option: hasAttr option config;
+      getValue = option: if hasAttr option config
+        then if getValue config.${option} then "y" else "n"
+        else null;
+      isYes = option: getValue config.${option};
+      isNo = option: getValue config.${option};
       isModule = option: false;
 
       isEnabled = option: getValue config.${option} or false == true;
