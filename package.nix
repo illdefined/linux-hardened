@@ -365,6 +365,8 @@ in stdenv.mkDerivation (finalAttrs: {
       isDisabled = option: getValue config.${option} or false == false;
     };
 
+    isModular = false;
+
     isHardened = true;
     isLibre = false;
     isZen = false;
