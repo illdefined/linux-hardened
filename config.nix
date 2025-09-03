@@ -135,7 +135,6 @@
     SLAB_FREELIST_RANDOM = true;
     SLAB_FREELIST_HARDENED = true;
     SLAB_BUCKETS = true;
-    SLAB_CANARY = true;
     SLUB_CPU_PARTIAL = true;
     RANDOM_KMALLOC_CACHES = true;
 
@@ -147,12 +146,9 @@
     # Zero call‐used registers
     ZERO_CALL_USED_REGS = true;
 
-    # False positives in combination with panic on BUG()
-    PAGE_SANITIZE_VERIFY = false;
-    SLAB_SANITIZE_VERIFY = false;
-
     MODULES = false;
 
+    LEGACY_TIOCSTI = false;
     LDISC_AUTOLOAD = false;
 
     DEVMEM = false;
@@ -175,7 +171,6 @@
     # Memory safety error detection
     KFENCE = true;
     KFENCE_DEFERRABLE = true;
-    KFENCE_BUG_ON_DATA_CORRUPTION = true;
 
     PANIC_ON_OOPS = true;
     PANIC_TIMEOUT = (-1);
@@ -186,8 +181,6 @@
     SECURITY_DMESG_RESTRICT = true;
     PROC_MEM_FORCE_PTRACE = true;
     MSEAL_SYSTEM_MAPPINGS = true;
-    SECURITY_PERF_EVENTS_RESTRICT = true;
-    SECURITY_TIOCSTI_RESTRICT = true;
     SECURITY = true;
     SECURITY_NETWORK = true;
     SECURITY_SELINUX = false;
@@ -225,7 +218,6 @@
   interfaces = {
     SYSVIPC = true;
     POSIX_MQUEUE = true;
-    USELIB = false;
 
     UID16 = false;
     SGETMASK_SYSCALL = false;
@@ -315,6 +307,8 @@
     MIGRATION = true;
 
     KSM = true;
+
+    DEFAULT_MMAP_MIN_ADDR = 65536;
 
     TRANSPARENT_HUGEPAGE = true;
     TRANSPARENT_HUGEPAGE_ALWAYS = true;
@@ -445,20 +439,17 @@
   } // lib.optionalAttrs hostPlatform.isx86_64 {
     X86_ACPI_CPUFREQ = true;
     X86_ACPI_CPUFREQ_CPB = false;
+    CPUFREQ_ARCH_CUR_FREQ = false;
   } // lib.optionalAttrs (hostPlatform.isAarch64 || hostPlatform.isRiscV64) {
     ACPI_CPPC_CPUFREQ = true;
   };
 
   framebuffer = {
-    DRM_SIMPLE_DRM = option true;
-    FB = true;
-    FB_EFI = true;
-    FB_SIMPLE = option true;
-    FB_DEVICE = false;
+    DRM = true;
+    DRM_FBDEV_EMULATION = true;
+    DRM_EFIDRM = true;
     VGA_CONSOLE = false;
     FRAMEBUFFER_CONSOLE = true;
-    FRAMEBUFFER_CONSOLE_DEFERRED_TAKEOVER = true;
-    SYSFB_SIMPLEFB = true;
   };
 
   network = {

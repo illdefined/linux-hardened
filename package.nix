@@ -4,7 +4,7 @@
   pkgsBuildBuild,
   pkgsBuildHost,
   pkgsHostHost,
-  fetchFromGitHub,
+  fetchurl,
   nix-update-script,
   ...
 }@args:
@@ -34,8 +34,7 @@ let
   inherit (lib.attrsets)
     filterAttrs
     hasAttr
-    mapAttrsToList
-    mergeAttrsList;
+    mapAttrsToList;
 
   inherit (lib.strings)
     concatStringsSep
@@ -77,15 +76,13 @@ in stdenv.mkDerivation (finalAttrs: {
   __structuredAttrs = true;
 
   pname = "linux-hardened";
-  version = "6.12.43-hardened1";
+  version = "6.16.4";
 
   modDirVersion = lib.versions.pad 3 finalAttrs.version;
 
-  src = fetchFromGitHub {
-    owner = "anthraxx";
-    repo = "linux-hardened";
-    tag = "v${finalAttrs.version}";
-    hash = "sha256-ss1XAZYxj99R1gp/VEnCG5ZWSuxP73U4itxUwkJQBiI=";
+  src = fetchurl {
+    url = "https://cdn.kernel.org/pub/linux/kernel/v${lib.versions.major finalAttrs.version}.x/linux-${finalAttrs.version}.tar.xz";
+    hash = "sha256-1qXjxxoQtTOnViUTh8yL9Iu9XHbYQrpelX2LHDFqtiI=";
   };
 
   strictDeps = true;
@@ -108,8 +105,6 @@ in stdenv.mkDerivation (finalAttrs: {
     pkgsBuildBuild.openssl
     pkgsBuildHost.elfutils
   ];
-
-  patches = [ ./io_uring-sysctl.patch ];
 
   enableParallelBuilding = true;
 
@@ -283,6 +278,9 @@ in stdenv.mkDerivation (finalAttrs: {
 
     sed -i '/select BLOCK_LEGACY_AUTOLOAD/d' drivers/md/Kconfig
 
+    # Maximise mmap randomisation
+    sed -E -i 's/\<(default ARCH_MMAP_RND(_COMPAT)?_BITS_)MIN\>/\1MAX/' arch/Kconfig
+
     find . -type f -name '*.lds.S' -print0 \
       | xargs -0 -r sed -E -i '/\<\.hash\>/d'
   '';
@@ -405,6 +403,5 @@ in stdenv.mkDerivation (finalAttrs: {
     license = lib.licenses.gpl2Only;
     maintainers = with lib.maintainers; [ mvs ];
     platforms = [ "riscv64-linux" "aarch64-linux" "x86_64-linux" ];
-
   };
 })) args
