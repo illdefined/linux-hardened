@@ -114,6 +114,10 @@ in stdenv.mkDerivation (finalAttrs: {
     cc = llvmPackages.clang-unwrapped;
     version = lib.versions.major cc.version;
 
+    rust-bindgen-unwrapped = pkgsBuildHost.rust-bindgen-unwrapped.override {
+      inherit (llvmPackages) clang;
+    };
+
     resource-dir = pkgsBuildBuild.runCommand "clang-resources" { } ''
       mkdir -p "$out"
       ln -s ${escapeShellArg "${lib.getLib cc}/lib/clang/${version}/include"} "$out"
@@ -198,7 +202,7 @@ in stdenv.mkDerivation (finalAttrs: {
     RUSTDOC = lib.getExe' pkgsBuildHost.rustPackages.rustc-unwrapped "rustdoc";
     RUSTFMT = lib.getExe pkgsBuildHost.rustPackages.rustfmt;
     CLIPPY_DRIVER = lib.getExe' pkgsBuildHost.rustPackages.clippy "clippy-driver";
-    BINDGEN = lib.getExe pkgsBuildHost.rust-bindgen-unwrapped;
+    BINDGEN = lib.getExe rust-bindgen-unwrapped;
     PAHOLE = lib.getExe' pkgsBuildHost.pahole "pahole";
 
     PKG_CONFIG = lib.getExe pkgsBuildHost.pkg-config;
