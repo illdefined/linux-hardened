@@ -116,8 +116,13 @@ in stdenv.mkDerivation (finalAttrs: {
   makeFlags = let
     exe = pkg: prg: lib.getExe' pkg (pkg.targetPrefix or "" + prg);
 
-    cc = llvmPackages.clang-unwrapped;
+    clang = llvmPackages.clangNoLibc;
+    inherit (clang) cc;
     version = lib.versions.major cc.version;
+
+    rust-bindgen-unwrapped = pkgsBuildHost.rust-bindgen-unwrapped.override {
+      inherit clang;
+    };
 
     resource-dir = pkgsBuildBuild.runCommand "clang-resources" { } ''
       mkdir -p "$out"
@@ -203,7 +208,7 @@ in stdenv.mkDerivation (finalAttrs: {
     RUSTDOC = lib.getExe' pkgsBuildHost.rustPackages.rustc-unwrapped "rustdoc";
     RUSTFMT = lib.getExe pkgsBuildHost.rustPackages.rustfmt;
     CLIPPY_DRIVER = lib.getExe' pkgsBuildHost.rustPackages.clippy "clippy-driver";
-    BINDGEN = lib.getExe pkgsBuildHost.rust-bindgen-unwrapped;
+    BINDGEN = lib.getExe rust-bindgen-unwrapped;
     PAHOLE = lib.getExe' pkgsBuildHost.pahole "pahole";
 
     PKG_CONFIG = lib.getExe pkgsBuildHost.pkg-config;
