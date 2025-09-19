@@ -393,8 +393,9 @@ in stdenv.mkDerivation (finalAttrs: {
     isLibre = false;
     isZen = false;
 
-    features = {
-      efiBootStub = true;
+    features = with kernel; {
+      efiBootStub = getValue config.EFI_STUB or false;
+      ia32Emulation = getValue config.IA32_EMULATION or false;
     };
 
     kernelOlder = lib.versionOlder finalAttrs.version;
