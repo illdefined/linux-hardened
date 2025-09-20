@@ -109,7 +109,10 @@ in stdenv.mkDerivation (finalAttrs: {
     pkgsBuildHost.elfutils
   ];
 
-  patches = [ ./io_uring-sysctl.patch ];
+  patches = [
+    ./io_uring-sysctl.patch
+    ./x86-vdso32-disable-ipra.patch
+  ];
 
   enableParallelBuilding = true;
 
@@ -220,7 +223,7 @@ in stdenv.mkDerivation (finalAttrs: {
       lib.optionals (targetCPU != null) [ "-mcpu=${targetCPU}" ]
       ++ lib.optionals (targetArch != null) [ "-march=${targetArch}" ]
       ++ lib.optionals (targetTune != null) [ "-mtune=${targetTune}" ]
-      ++ map (flag: [ "-mllvm" flag ]) [
+      ++ map (flag: "-mllvm=${flag}") [
         "--enable-deferred-spilling"
         "--enable-gvn-hoist"
         "--enable-ipra"
