@@ -292,7 +292,9 @@ in stdenv.mkDerivation (finalAttrs: {
     sed -i '/select BLOCK_LEGACY_AUTOLOAD/d' drivers/md/Kconfig
 
     find . -type f -name '*.lds.S' -print0 \
-      | xargs -0 -r sed -E -i '/\<\.hash\>/d'
+      | xargs -0 -r sed -E -i \
+        -e '/^[[:space:]]*\.hash\>/d' \
+        -e 's/^([[:space:]]*\.gnu\.hash\>.*)/\1 :text/'
   '';
 
   preConfigure = ''
