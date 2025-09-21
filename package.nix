@@ -77,7 +77,7 @@ in stdenv.mkDerivation (finalAttrs: {
   __structuredAttrs = true;
 
   pname = "linux-hardened";
-  version = "6.12.50-hardened1";
+  version = "6.16.10-hardened1";
 
   modDirVersion = lib.versions.pad 3 finalAttrs.version;
 
@@ -85,7 +85,7 @@ in stdenv.mkDerivation (finalAttrs: {
     owner = "anthraxx";
     repo = "linux-hardened";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-NN2yM2Vpk/twPjj6vyuYLX2HpNOWpJoB9dB9Kesh2l8=";
+    hash = "sha256-3NGCpCFDL9s4pK6f+AQVdDWvRIq+gt/YkgBLOSsWoCE=";
   };
 
   strictDeps = true;
@@ -224,7 +224,7 @@ in stdenv.mkDerivation (finalAttrs: {
       ++ lib.optionals (targetArch != null) [ "-march=${targetArch}" ]
       ++ lib.optionals (targetTune != null) [ "-mtune=${targetTune}" ]
       ++ map (flag: "-mllvm=${flag}") [
-        #"--enable-deferred-spilling"
+/*        #"--enable-deferred-spilling"
         "--enable-gvn-hoist"
         "--enable-ipra"
         "--enable-merge-functions"
@@ -240,7 +240,7 @@ in stdenv.mkDerivation (finalAttrs: {
         "--polly-run-dce"
         "--polly-run-inliner"
         "--polly-matmul-opt"
-        "--polly-tc-opt"
+        "--polly-tc-opt"*/
     ] |> toString;
 
     KRUSTFLAGS = [

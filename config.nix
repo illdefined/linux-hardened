@@ -17,7 +17,7 @@
 
     JUMP_LABEL = true;
 
-    LTO_CLANG_FULL = true;
+    #LTO_CLANG_FULL = true;
   };
 
   boot = {
@@ -128,7 +128,7 @@
     INIT_STACK_ALL_ZERO = true;
 
     STRICT_KERNEL_RWX = true;
-    CFI_CLANG = true;
+    #CFI_CLANG = true;
 
     # Slab allocator
     SLAB_MERGE_DEFAULT = false;
@@ -453,15 +453,18 @@
   };
 
   framebuffer = {
-    DRM_SIMPLE_DRM = option true;
+    DRM = true;
+    DRM_FBDEV_EMULATION = true;
+    DRM_FBDEV_OVERALLOC = 300;
+    DRM_EFIDRM = true;
+
+    #FB = false;
+    #VGA_CONSOLE = option false;
+    FRAMEBUFFER_CONSOLE = true;
+
+    # testing
     FB = true;
     FB_EFI = true;
-    FB_SIMPLE = option true;
-    FB_DEVICE = false;
-    VGA_CONSOLE = false;
-    FRAMEBUFFER_CONSOLE = true;
-    FRAMEBUFFER_CONSOLE_DEFERRED_TAKEOVER = true;
-    SYSFB_SIMPLEFB = true;
   };
 
   network = {
