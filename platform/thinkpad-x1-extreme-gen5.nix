@@ -6,7 +6,7 @@
     wireless = true;
     audio = true;
   };
-  
+
   platformConfig = { option, lib, hostPlatform }: {
     X86_INTEL_LPSS = true;
 
@@ -63,10 +63,6 @@
 
     INT340X_THERMAL = true;
 
-    VIDEO = true;
-    VGA_SWITCHEROO = true;
-    DRM = true;
-    DRM_FBDEV_EMULATION = true;
     DRM_DISPLAY_DP_AUX_CEC = true;
     DRM_DISPLAY_DP_AUX_CHARDEV = true;
     DRM_I915 = true;
@@ -100,7 +96,7 @@
     THINKPAD_ACPI = true;
     THINKPAD_ACPI_ALSA_SUPPORT = true;
     THINKPAD_ACPI_VIDEO = true;
-
+    THINKPAD_LMI = true;
     INTEL_TURBO_MAX_3 = true;
     INTEL_VSEC = true;
 

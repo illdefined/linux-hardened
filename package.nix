@@ -34,8 +34,7 @@ let
   inherit (lib.attrsets)
     filterAttrs
     hasAttr
-    mapAttrsToList
-    mergeAttrsList;
+    mapAttrsToList;
 
   inherit (lib.strings)
     concatStringsSep
@@ -77,7 +76,7 @@ in stdenv.mkDerivation (finalAttrs: {
   __structuredAttrs = true;
 
   pname = "linux-hardened";
-  version = "6.12.50-hardened1";
+  version = "6.16.10-hardened1";
 
   modDirVersion = lib.versions.pad 3 finalAttrs.version;
 
@@ -85,7 +84,7 @@ in stdenv.mkDerivation (finalAttrs: {
     owner = "anthraxx";
     repo = "linux-hardened";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-NN2yM2Vpk/twPjj6vyuYLX2HpNOWpJoB9dB9Kesh2l8=";
+    hash = "sha256-3NGCpCFDL9s4pK6f+AQVdDWvRIq+gt/YkgBLOSsWoCE=";
   };
 
   strictDeps = true;
@@ -154,13 +153,10 @@ in stdenv.mkDerivation (finalAttrs: {
     in pkgsBuildBuild.writeShellApplication {
       name = "ld.lld";
       text = ''
-        declare -a params prefix suffix
+        declare -a params suffix
 
         while (($# >= 1)); do
           case "$1" in
-          --hash-style=*)
-            shift
-            continue;;
           -m)
             params+=("$1")
             target="$2"
@@ -170,8 +166,6 @@ in stdenv.mkDerivation (finalAttrs: {
           params+=("$1")
           shift
         done
-
-        prefix+=(--hash-style=gnu --lto-O2 -O2)
 
         if [[ -v target ]]; then
           arch="''${target#elf_}"
@@ -185,7 +179,7 @@ in stdenv.mkDerivation (finalAttrs: {
           |> concatStringsSep "\n"}
         esac
 
-        exec ${lib.getExe' llvmPackages.lld "ld.lld"} "''${prefix[@]}" "''${params[@]}" "''${suffix[@]}"
+        exec ${lib.getExe' llvmPackages.lld "ld.lld"} "''${params[@]}" "''${suffix[@]}"
       '';
     };
   in {
@@ -219,12 +213,7 @@ in stdenv.mkDerivation (finalAttrs: {
 
   env = {
     ARCH = hostPlatform.linuxArch;
-    KCFLAGS =
-      lib.optionals (targetCPU != null) [ "-mcpu=${targetCPU}" ]
-      ++ lib.optionals (targetArch != null) [ "-march=${targetArch}" ]
-      ++ lib.optionals (targetTune != null) [ "-mtune=${targetTune}" ]
-      ++ map (flag: "-mllvm=${flag}") [
-        #"--enable-deferred-spilling"
+    KCFLAGS = map (flag: "-mllvm=${flag}") [
         "--enable-gvn-hoist"
         "--enable-ipra"
         "--enable-merge-functions"
@@ -289,13 +278,41 @@ in stdenv.mkDerivation (finalAttrs: {
   in ''
     patchShebangs scripts/
 
-    sed -i '/select BLOCK_LEGACY_AUTOLOAD/d' drivers/md/Kconfig
+    sed -i \
+      '/\<select BLOCK_LEGACY_AUTOLOAD\>/d' \
+      drivers/md/Kconfig
 
+    # Add link‐time optimisation options
+    sed -E -i \
+      's/^([[:space:]]*LDFLAGS_vmlinux[[:space:]]*)=[[:space:]]*$/\1:= --lto-O2/' \
+      Makefile
+
+    # Discard legacy ELF hash tables
     find . -type f -name '*.lds.S' -print0 \
       | xargs -0 -r sed -E -i \
-        -e '/^[[:space:]]*\.hash\>/d' \
-        -e 's/^([[:space:]]*\.gnu\.hash\>.*)/\1 :text/'
-  '';
+        's;^([[:space:]]*)\.hash\>;\1/DISCARD/;'
+
+    # Adjust binary search paths for Nix
+    find . -type f \( -name '*.[hc]' -o -name 'Kconfig' -o -name 'Kconfig.*' \) -print0 \
+      | xargs -0 -r sed -E -i \
+        -e 's;"/sbin/(poweroff|reboot)";"/run/current-system/sw/bin/systemctl \1";g' \
+        -e 's;"(PATH=)(/usr)?/s?bin(:(/usr)?/s?bin)*";"\1/run/current-system/sw/bin";g' \
+        -e 's;"/s?bin/([^"/]+)";"/run/current-system/sw/bin/\1";g'
+
+  '' + lib.optionalString (hostPlatform.linuxArch == "x86")
+    (if targetArch != null then ''
+      substituteInPlace arch/x86/Makefile \
+        --replace-fail \
+          '-march=x86-64 -mtune=generic' \
+          -march=${escapeShellArg targetArch} \
+        --replace-fail \
+          '-Ctarget-cpu=x86-64 -Ztune-cpu=generic' \
+          -Ctarget-cpu=${escapeShellArg targetArch}
+    '' else if targetTune != null then ''
+      substituteInPlace arch/x86/Makefile \
+        --replace-fail -mtune=generic -mtune=${escapeShellArg targetTune}
+        --replace-fail -Ztune-cpu=generic -Ztune-cpu=${escapeShellArg targetTune}
+    '' else "");
 
   preConfigure = ''
     mkdir build

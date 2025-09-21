@@ -46,19 +46,9 @@
 } // lib.optionalAttrs hostPlatform.isx86_64 {
   CRYPTO_AES_NI_INTEL = option true;
   CRYPTO_DES3_EDE_X86_64 = option true;
-  CRYPTO_SHA1_SSSE3 = option true;
-  CRYPTO_SHA256_SSSE3 = option true;
-  CRYPTO_SHA512_SSSE3 = option true;
 } // lib.optionalAttrs hostPlatform.isRiscV64 {
   CRYPTO_AES_RISCV64 = option true;
-  CRYPTO_SHA256_RISCV64 = option true;
-  CRYPTO_SHA512_RISCV64 = option true;
 } // lib.optionalAttrs hostPlatform.isAarch64 {
   CRYPTO_AES_ARM64_CE = option true;
   CRYPTO_AES_ARM64_CE_BLK = option true;
-  CRYPTO_SHA1_ARM64_CE = option true;
-  CRYPTO_SHA256_ARM64 = option true;
-  CRYPTO_SHA2_ARM64_CE = option true;
-  CRYPTO_SHA512_ARM64 = option true;
-  CRYPTO_SHA512_ARM64_CE = option true;
 }

@@ -128,7 +128,9 @@
     INIT_STACK_ALL_ZERO = true;
 
     STRICT_KERNEL_RWX = true;
-    CFI_CLANG = true;
+
+    # Currently broken for full LTO
+    #CFI_CLANG = true;
 
     # Slab allocator
     SLAB_MERGE_DEFAULT = false;
@@ -453,15 +455,13 @@
   };
 
   framebuffer = {
-    DRM_SIMPLE_DRM = option true;
-    FB = true;
-    FB_EFI = true;
-    FB_SIMPLE = option true;
-    FB_DEVICE = false;
-    VGA_CONSOLE = false;
+    DRM = true;
+    DRM_FBDEV_EMULATION = true;
+    DRM_FBDEV_OVERALLOC = 300;
+    DRM_EFIDRM = true;
+
+    VGA_CONSOLE = option false;
     FRAMEBUFFER_CONSOLE = true;
-    FRAMEBUFFER_CONSOLE_DEFERRED_TAKEOVER = true;
-    SYSFB_SIMPLEFB = true;
   };
 
   network = {

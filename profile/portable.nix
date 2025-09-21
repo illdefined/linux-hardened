@@ -32,6 +32,7 @@
   TYPEC_UCSI = true;
   UCSI_ACPI = true;
   TYPEC_DP_ALTMODE = true;
+  TYPEC_TBT_ALTMODE = true;
 
   MMC = true;
   MMC_BLOCK = true;
