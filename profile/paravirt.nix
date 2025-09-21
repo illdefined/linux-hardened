@@ -10,12 +10,9 @@
 
   HW_RANDOM_VIRTIO = true;
 
-  DRM = true;
-  DRM_FBDEV_EMULATION = true;
   DRM_VIRTIO_GPU = true;
   DRM_VIRTIO_GPU_KMS = true;
   DRM_BOCHS = true;
-  DRM_SIMPLEDRM = true;
 
   VIRT_DRIVERS = true;
   VMGENID = true;

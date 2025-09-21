@@ -449,15 +449,14 @@
   };
 
   framebuffer = {
-    DRM_SIMPLE_DRM = option true;
-    FB = true;
-    FB_EFI = true;
-    FB_SIMPLE = option true;
-    FB_DEVICE = false;
-    VGA_CONSOLE = false;
+    DRM = true;
+    DRM_FBDEV_EMULATION = true;
+    DRM_FBDEV_OVERALLOC = 300;
+    DRM_EFIDRM = true;
+
+    FB = false;
+    VGA_CONSOLE = option false;
     FRAMEBUFFER_CONSOLE = true;
-    FRAMEBUFFER_CONSOLE_DEFERRED_TAKEOVER = true;
-    SYSFB_SIMPLEFB = true;
   };
 
   network = {

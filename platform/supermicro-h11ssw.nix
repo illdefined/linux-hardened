@@ -33,7 +33,7 @@
 
     BNXT = true;
     BNXT_FLOWER_OFFLOAD = true;
-    BNXT_HWMON = true; 
+    BNXT_HWMON = true;
 
     IPMI_HANDLER = true;
     IPMI_PANIC_EVENT = true;
@@ -53,9 +53,6 @@
     WATCHDOG_SYSFS = true;
     SP5100_TCO = true;
 
-    VIDEO = true;
-    DRM = true;
-    DRM_FBDEV_EMULATION = true;
     DRM_AST = true;
 
     EDAC_DECODE_MCE = true;
