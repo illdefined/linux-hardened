@@ -70,9 +70,9 @@
     RCU_TRACE = false;
 
   } // lib.optionalAttrs hostPlatform.isx86_64 {
-    X86_VERBOSE_BOOTUP = false;
-    EARLY_PRINTK = false;
-    X86_DEBUG_FPU = false;
+    #X86_VERBOSE_BOOTUP = false;
+    #EARLY_PRINTK = false;
+    #X86_DEBUG_FPU = false;
 
     UNWINDER_ORC = true;
   };
@@ -120,32 +120,32 @@
     RANDOMIZE_BASE = true;
 
     # Stack protection
-    STACKPROTECTOR = true;
-    STACKPROTECTOR_STRONG = true;
+    #STACKPROTECTOR = true;
+    #STACKPROTECTOR_STRONG = true;
     VMAP_STACK = true;
     RANDOMIZE_KSTACK_OFFSET = true;
     RANDOMIZE_KSTACK_OFFSET_DEFAULT = true;
-    INIT_STACK_ALL_ZERO = true;
+    #INIT_STACK_ALL_ZERO = true;
 
-    STRICT_KERNEL_RWX = true;
-    CFI_CLANG = true;
+    #STRICT_KERNEL_RWX = true;
+    #CFI_CLANG = true;
 
     # Slab allocator
-    SLAB_MERGE_DEFAULT = false;
-    SLAB_FREELIST_RANDOM = true;
-    SLAB_FREELIST_HARDENED = true;
-    SLAB_BUCKETS = true;
-    SLAB_CANARY = true;
-    SLUB_CPU_PARTIAL = true;
-    RANDOM_KMALLOC_CACHES = true;
+    #SLAB_MERGE_DEFAULT = false;
+    #SLAB_FREELIST_RANDOM = true;
+    #SLAB_FREELIST_HARDENED = true;
+    #SLAB_BUCKETS = true;
+    #SLAB_CANARY = true;
+    #SLUB_CPU_PARTIAL = true;
+    #RANDOM_KMALLOC_CACHES = true;
 
     # Page allocator
-    SHUFFLE_PAGE_ALLOCATOR = true;
+    #SHUFFLE_PAGE_ALLOCATOR = true;
     COMPAT_BRK = false;
-    INIT_ON_FREE_DEFAULT_ON = true;
+    #INIT_ON_FREE_DEFAULT_ON = true;
 
     # Zero call‐used registers
-    ZERO_CALL_USED_REGS = true;
+    #ZERO_CALL_USED_REGS = true;
 
     # False positives in combination with panic on BUG()
     PAGE_SANITIZE_VERIFY = false;
@@ -170,18 +170,18 @@
 
     # User page table sanity checks
     PAGE_TABLE_CHECK = true;
-    PAGE_TABLE_CHECK_ENFORCED = true;
+    #PAGE_TABLE_CHECK_ENFORCED = true;
 
     # Memory safety error detection
-    KFENCE = true;
-    KFENCE_DEFERRABLE = true;
-    KFENCE_BUG_ON_DATA_CORRUPTION = true;
+    #KFENCE = true;
+    #KFENCE_DEFERRABLE = true;
+    #KFENCE_BUG_ON_DATA_CORRUPTION = true;
 
     PANIC_ON_OOPS = true;
     PANIC_TIMEOUT = (-1);
 
-    HARDENED_USERCOPY = true;
-    FORTIFY_SOURCE = true;
+    #HARDENED_USERCOPY = true;
+    #FORTIFY_SOURCE = true;
 
     SECURITY_DMESG_RESTRICT = true;
     PROC_MEM_FORCE_PTRACE = true;
