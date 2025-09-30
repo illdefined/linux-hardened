@@ -296,6 +296,7 @@
     BLK_CGROUP = true;
     CPUSETS = true;
     CGROUP_DEVICE = true;
+    CGROUP_CPUACCT = true;
 
   } // lib.optionalAttrs hostPlatform.isx86_64 {
     SCHED_OMIT_FRAME_POINTER = true;
