@@ -292,8 +292,9 @@
     RCU_LAZY = true;
 
     CGROUPS = true;
-    BLK_CGROUP = true;
     CGROUP_SCHED = true;
+    BLK_CGROUP = true;
+    CPUSETS = true;
 
   } // lib.optionalAttrs hostPlatform.isx86_64 {
     SCHED_OMIT_FRAME_POINTER = true;
