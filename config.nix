@@ -293,6 +293,7 @@
 
     CGROUPS = true;
     CGROUP_SCHED = true;
+    CGROUP_PIDS = true;
     BLK_CGROUP = true;
     CPUSETS = true;
     CGROUP_DEVICE = true;
