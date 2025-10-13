@@ -492,6 +492,9 @@
     DEFAULT_BBR = true;
 
     IPV6 = true;
+    IPV6_ROUTER_PREF = true;
+    IPV6_ROUTE_INFO = true;
+    IPV6_OPTIMISTIC_DAD = true;
     INET6_AH = true;
     INET6_ESP = true;
 
