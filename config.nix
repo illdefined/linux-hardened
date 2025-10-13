@@ -475,6 +475,8 @@
 
     INET = true;
     IP_MULTICAST = true;
+    IP_ADVANCED_ROUTER = true;
+    IP_MULTIPLE_TABLES = true;
     SYN_COOKIES = true;
     INET_AH = true;
     INET_ESP = true;
@@ -497,6 +499,8 @@
     IPV6_OPTIMISTIC_DAD = true;
     INET6_AH = true;
     INET6_ESP = true;
+    IPV6_MULTIPLE_TABLES = true;
+    IPV6_SUBTREES = true;
 
     NETFILTER = true;
     NETFILTER_ADVANCED = true;
