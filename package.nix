@@ -224,7 +224,7 @@ in stdenv.mkDerivation (finalAttrs: {
       ++ lib.optionals (targetArch != null) [ "-march=${targetArch}" ]
       ++ lib.optionals (targetTune != null) [ "-mtune=${targetTune}" ]
       ++ map (flag: "-mllvm=${flag}") [
-        "--enable-deferred-spilling"
+        #"--enable-deferred-spilling"
         "--enable-gvn-hoist"
         "--enable-ipra"
         "--enable-merge-functions"
