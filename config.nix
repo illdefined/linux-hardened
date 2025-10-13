@@ -472,7 +472,9 @@
     UNIX_DIAG = true;
     XDP_SOCKETS = true;
     XDP_SOCKETS_DIAG = true;
+
     INET = true;
+    IP_MULTICAST = true;
     SYN_COOKIES = true;
     INET_AH = true;
     INET_ESP = true;
