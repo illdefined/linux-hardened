@@ -589,6 +589,7 @@
     EROFS_FS_SECURITY = false;
     EROFS_FS_ZIP = true;
     EROFS_FS_ZIP_ZSTD = true;
+    EROFS_FS_PCPU_KTHREAD = true;
 
     NLS = true;
     NLS_CODEPAGE_437 = true;
