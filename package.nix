@@ -219,30 +219,6 @@ in stdenv.mkDerivation (finalAttrs: {
 
   env = {
     ARCH = hostPlatform.linuxArch;
-    KCFLAGS =
-      lib.optionals (targetCPU != null) [ "-mcpu=${targetCPU}" ]
-      ++ lib.optionals (targetArch != null) [ "-march=${targetArch}" ]
-      ++ lib.optionals (targetTune != null) [ "-mtune=${targetTune}" ]
-      ++ map (flag: "-mllvm=${flag}") [
-        #"--enable-deferred-spilling"
-        "--enable-gvn-hoist"
-        "--enable-ipra"
-        "--enable-merge-functions"
-
-        "--hot-cold-split"
-        "--hot-cold-static-analysis"
-
-        "--polly"
-        "--polly-tiling"
-        "--polly-2nd-level-tiling"
-        "--polly-register-tiling"
-        "--polly-invariant-load-hoisting"
-        "--polly-run-dce"
-        "--polly-run-inliner"
-        "--polly-matmul-opt"
-        "--polly-tc-opt"
-    ] |> toString;
-
     KRUSTFLAGS = [
       "--remap-path-prefix" "${pkgsBuildHost.rustPlatform.rustLibSrc}=/"
     ] |> toString;
