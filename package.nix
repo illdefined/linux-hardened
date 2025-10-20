@@ -299,7 +299,7 @@ in stdenv.mkDerivation (finalAttrs: {
         -e 's;"(PATH=)(/usr)?/s?bin(:(/usr)?/s?bin)*";"\1/run/current-system/sw/bin";g' \
         -e 's;"/s?bin/([^"/]+)";"/run/current-system/sw/bin/\1";g'
 
-  '' + lib.optionalString (hostPlatform.linuxArch == "x86")
+  '' + lib.optionalString hostPlatform.isx86
     (if targetArch != null then ''
       substituteInPlace arch/x86/Makefile \
         --replace-fail \
