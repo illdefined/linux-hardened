@@ -21,12 +21,12 @@
   };
 
   boot = {
-    KERNEL_ZSTD = true;
+    KERNEL_XZ = true;
     BLK_DEV_INITRD = true;
     RD_GZIP = false;
     RD_BZIP2 = false;
     RD_LZMA = false;
-    RD_XZ = false;
+    RD_XZ = true;
     RD_LZO = false;
     RD_LZ4 = false;
     RD_ZSTD = true;
@@ -43,9 +43,18 @@
 
     FW_LOADER = true;
     FW_LOADER_COMPRESS = true;
-    FW_LOADER_COMPRESS_XZ = false;
+    FW_LOADER_COMPRESS_XZ = true;
     FW_LOADER_COMPRESS_ZSTD = true;
     FW_CACHE = true;
+
+    # XZ BCJ filters
+    XZ_DEC_X86 = hostPlatform.isx86;
+    XZ_DEC_POWERPC = false;
+    XZ_DEC_ARM = false;
+    XZ_DEC_ARMTHUMB = false;
+    XZ_DEC_ARM64 = hostPlatform.isAarch64;
+    XZ_DEC_SPARC = false;
+    XZ_DEC_RISCV = hostPlatform.isRiscV;
   } // lib.optionalAttrs hostPlatform.isx86_64 {
     EFI_HANDOVER_PROTOCOL = false;
   };
