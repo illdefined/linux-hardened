@@ -161,13 +161,8 @@
 
     DEBUG_FS = false;
 
-    # Bounds checking
-    # False positives in iwlwifi
-    #UBSAN = true;
-    #UBSAN_BOUNDS = true;
-    #UBSAN_SIGNED_WRAP = false;
-    #UBSAN_BOOL = false;
-    #UBSAN_ENUM = false;
+    # Undefined behaviour sanitiser
+    UBSAN = true;
 
     # User page table sanity checks
     PAGE_TABLE_CHECK = true;
