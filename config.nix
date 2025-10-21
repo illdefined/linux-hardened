@@ -149,9 +149,8 @@
     # Zero call‐used registers
     ZERO_CALL_USED_REGS = true;
 
-    # False positives in combination with panic on BUG()
-    PAGE_SANITIZE_VERIFY = false;
-    SLAB_SANITIZE_VERIFY = false;
+    PAGE_SANITIZE_VERIFY = true;
+    SLAB_SANITIZE_VERIFY = true;
 
     MODULES = false;
 
