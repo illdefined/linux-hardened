@@ -160,7 +160,9 @@
     ZERO_CALL_USED_REGS = true;
 
     PAGE_SANITIZE_VERIFY = true;
-    SLAB_SANITIZE_VERIFY = true;
+
+    # Adverse interaction with Nouveau driver
+    SLAB_SANITIZE_VERIFY = false;
 
     MODULES = false;
 
