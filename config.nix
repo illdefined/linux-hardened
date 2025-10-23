@@ -95,6 +95,7 @@
 
     # pstore
     PSTORE = true;
+    PSTORE_DEFAULT_KMSG_BYTES = 16384;
     PSTORE_COMPRESS = true;
     EFI_VARS_PSTORE = true;
   };
