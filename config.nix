@@ -534,9 +534,10 @@
 
     NET_SCH_CAKE = true;
     NET_SCH_FQ = true;
+    NET_SCH_FQ_CODEL = true;
     NET_SCH_DEFAULT = true;
-    DEFAULT_FQ = true;
-    DEFAULT_NET_SCH = "fq";
+    DEFAULT_FQ_CODEL = true;
+    DEFAULT_NET_SCH = "fq_codel";
 
     NETLINK_DIAG = true;
     ETHTOOL_NETLINK = true;
