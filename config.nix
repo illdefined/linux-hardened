@@ -542,6 +542,7 @@
     ETHTOOL_NETLINK = true;
 
     NETDEVICES = true;
+    DUMMY = true;
     ETHERNET = true;
   };
 
