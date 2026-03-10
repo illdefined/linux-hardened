@@ -11,7 +11,6 @@
 
 lib.makeOverridable ({
   llvmPackages ? pkgsBuildHost.rustPackages.rustc.llvmPackages,
-  targetCPU ? stdenv.hostPlatform.gcc.cpu or null,
   targetArch ? stdenv.hostPlatform.gcc.arch or null,
   targetTune ? stdenv.hostPlatform.gcc.tune or null,
   platformConfig ? { },
