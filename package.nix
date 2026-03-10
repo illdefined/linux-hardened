@@ -213,6 +213,7 @@ in stdenv.mkDerivation (finalAttrs: {
 
   env = {
     ARCH = hostPlatform.linuxArch;
+    DTC_FLAGS = "-@";
     KCFLAGS = map (flag: "-mllvm=${flag}") [
         "--enable-gvn-hoist"
         "--enable-ipra"
@@ -273,9 +274,7 @@ in stdenv.mkDerivation (finalAttrs: {
     done
   '';
 
-  postPatch = let
-    rtlib = lib.getLib llvmPackages.compiler-rt-no-libc;
-  in ''
+  postPatch = ''
     patchShebangs scripts/
 
     sed -i \
@@ -370,6 +369,12 @@ in stdenv.mkDerivation (finalAttrs: {
     done
   '';
 
+  buildFlags = [
+    hostPlatform.linux-kernel.target
+  ] ++ lib.optionals hostPlatform.linux-kernel.DTB or false [
+    "dtbs"
+  ];
+
   preInstall = let
     installkernel = pkgsBuildBuild.writeShellScriptBin "installkernel" ''
       cp "$2" "$4"
@@ -380,13 +385,16 @@ in stdenv.mkDerivation (finalAttrs: {
   '';
 
   installFlags = [
-    "INSTALL_PATH=$(out)"
-    "INSTALL_MOD_PATH=$(out)"
+    "INSTALL_PATH=${placeholder "out"}"
+    "INSTALL_MOD_PATH=${placeholder "out"}"
+    "INSTALL_DTBS_PATH=${placeholder "out"}/dtbs"
   ];
 
   installTargets = [
     "install"
     "modules_install"
+  ] ++ lib.optionals hostPlatform.linux-kernel.DTB or false [
+    "dtbs_install"
   ];
 
   postInstall = ''
