@@ -74,7 +74,6 @@
     SLUB_DEBUG = false;
 
     DEBUG_WX = true;
-    WARN_ALL_UNSEEDED_RANDOM = true;
 
     RCU_TRACE = false;
 
