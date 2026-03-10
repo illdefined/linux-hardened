@@ -206,8 +206,6 @@
     LIST_HARDENED = true;
     BUG_ON_DATA_CORRUPTION = true;
 
-  } // lib.optionalAttrs (with hostPlatform; isRiscV64 || isAarch64) {
-    SHADOW_CALL_STACK = true;
   } // lib.optionalAttrs hostPlatform.isx86_64 {
     X86_UMIP = true;
     X86_USER_SHADOW_STACK = true;
