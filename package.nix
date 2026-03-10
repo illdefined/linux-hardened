@@ -213,7 +213,9 @@ in stdenv.mkDerivation (finalAttrs: {
   env = {
     ARCH = hostPlatform.linuxArch;
     DTC_FLAGS = "-@";
-    KCFLAGS = map (flag: "-mllvm=${flag}") [
+    KCFLAGS = lib.optionals (targetTune != null) [
+      "-mtune=${targetTune}"
+    ] ++ map (flag: "-mllvm=${flag}") [
         "--enable-gvn-hoist"
         "--enable-ipra"
         "--enable-merge-functions"
@@ -234,6 +236,8 @@ in stdenv.mkDerivation (finalAttrs: {
 
     KRUSTFLAGS = [
       "--remap-path-prefix" "${pkgsBuildHost.rustPlatform.rustLibSrc}=/"
+    ] ++ lib.optionals (targetTune != null) [
+      "-Ztune-cpu=${targetTune}"
     ] |> toString;
 
     LIBCLANG_PATH = lib.getLib llvmPackages.libclang + "/lib";
