@@ -327,7 +327,9 @@
     KSM = true;
 
     TRANSPARENT_HUGEPAGE = true;
-    TRANSPARENT_HUGEPAGE_ALWAYS = true;
+    TRANSPARENT_HUGEPAGE_MADVISE = true;
+    TRANSPARENT_HUGEPAGE_SHMEM_HUGE_WITHIN_SIZE = true;
+    TRANSPARENT_HUGEPAGE_TMPFS_HUGE_WITHIN_SIZE = true;
     READ_ONLY_THP_FOR_FS = true;
     HUGETLBFS = true;
     HUGETLB_PAGE_OPTIMIZE_VMEMMAP = option true;
@@ -438,7 +440,6 @@
     ENERGY_MODEL = true;
     ACPI = true;
     ACPI_APEI = true;
-    ACPI_NUMA = true;
 
     CPU_FREQ = true;
     CPU_FREQ_STAT = true;

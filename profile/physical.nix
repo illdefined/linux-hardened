@@ -2,7 +2,6 @@
   ACPI_BUTTON = true;
   ACPI_FAN = true;
   ACPI_TAD = true;
-  ACPI_PROCESSOR_AGGREGATOR = true;
   ACPI_THERMAL = true;
   ACPI_PCI_SLOT = true;
 
@@ -32,4 +31,6 @@
   POWERCAP = true;
 
   RAS = true;
+} // lib.optionalAttrs hostPlatform.isx86_64 {
+  ACPI_PROCESSOR_AGGREGATOR = true;
 }
