@@ -30,6 +30,7 @@
       in {
         default = package { };
         paravirt = package ./platform/paravirt.nix;
+        thinkpad-t14s-gen6-x1e = package ./platform/thinkpad-t14s-gen6-x1e.nix;
       };
 
       x86_64-linux = let
