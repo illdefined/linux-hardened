@@ -582,6 +582,8 @@
     BTRFS_FS = true;
     BTRFS_FS_POSIX_ACL = true;
 
+    FUSE_FS = true;
+
     OVERLAY_FS = true;
     OVERLAY_FS_REDIRECT_DIR = true;
     OVERLAY_FS_REDIRECT_ALWAYS_FOLLOW = false;
