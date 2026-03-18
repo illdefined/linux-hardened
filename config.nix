@@ -21,7 +21,8 @@
   };
 
   boot = {
-    KERNEL_XZ = true;
+    KERNEL_XZ = !hostPlatform.isAarch64;
+    KERNEL_ZSTD = hostPlatform.isAarch64;
     BLK_DEV_INITRD = true;
     RD_GZIP = false;
     RD_BZIP2 = false;
