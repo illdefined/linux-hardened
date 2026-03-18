@@ -39,5 +39,7 @@
 
   USB4 = true;
 
+  EXFAT_FS = true;
+
   KFENCE_SAMPLE_INTERVAL = "2000";
 }
