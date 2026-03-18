@@ -351,7 +351,7 @@
       ZSMALLOC = true;
       ZRAM = true;
       ZRAM_BACKEND_ZSTD = true;
-      ZRAM_DEF_COMP_ZSTD = true;
+      ZRAM_BACKEND_LZO = true;
       ZRAM_WRITEBACK = true;
       ZRAM_TRACK_ENTRY_ACTIME = true;
       ZRAM_MULTI_COMP = true;
