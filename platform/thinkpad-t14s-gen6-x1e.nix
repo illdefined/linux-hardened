@@ -148,7 +148,7 @@
 
     EDAC_QCOM = true;
 
-    CONFIG_RTC_DRV_PM8XXX = true;
+    RTC_DRV_PM8XXX = true;
 
     QCOM_GPI_DMA = true;
 
