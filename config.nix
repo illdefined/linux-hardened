@@ -430,7 +430,6 @@
     USB_DEFAULT_PERSIST = true;
     USB_DYNAMIC_MINORS = true;
     USB_XHCI_HCD = true;
-    USB_XHCI_PCI = true;
   };
 
   power = {
