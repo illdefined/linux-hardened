@@ -353,6 +353,8 @@
       ZRAM_BACKEND_ZSTD = true;
       ZRAM_DEF_COMP_ZSTD = true;
       ZRAM_WRITEBACK = true;
+      ZRAM_TRACK_ENTRY_ACTIME = true;
+      ZRAM_MULTI_COMP = true;
     };
   } // lib.optionalAttrs hostPlatform.isx86_64 {
     AMD_NUMA = option false;
