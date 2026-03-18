@@ -123,11 +123,6 @@
     SND_SOC_LPASS_RX_MACRO = true;
     SND_SOC_LPASS_TX_MACRO = true;
 
-    QCOM_RPMHP = true;
-    QCOM_SMEM = true;
-    QCOM_SMP2P = true;
-    QCOM_APR = true;
-
     QCOM_RPMHPD = true;
 
     HID_MULTITOUCH = true;
@@ -186,6 +181,9 @@
     QCOM_LLCC = true;
     QCOM_PMIC_GLINK = true;
     QCOM_RPMH = true;
+    QCOM_SMEM = true;
+    QCOM_SMP2P = true;
+    QCOM_APR = true;
     QCOM_ICC_BWMON = true;
 
     ARM_PMUV3 = true;
