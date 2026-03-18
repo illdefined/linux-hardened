@@ -23,7 +23,6 @@
 
     ARM64_64K_PAGES = true;
     NR_CPUS = 12;
-    NUMA = false;
     ARM64_EPAN = false;
     ARM64_POE = false;
     ARM64_HAFT = false;

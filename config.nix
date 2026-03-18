@@ -314,10 +314,6 @@
   };
 
   memory = {
-    NUMA = true;
-    NUMA_BALANCING = true;
-    NUMA_BALANCING_DEFAULT_ENABLED = true;
-
     SPARSEMEM_VMEMMAP = true;
     MEMORY_HOTPLUG = true;
     MEMORY_HOTREMOVE = true;
@@ -358,9 +354,6 @@
       ZRAM_MULTI_COMP = true;
     };
   } // lib.optionalAttrs hostPlatform.isx86_64 {
-    AMD_NUMA = option false;
-    X86_64_ACPI_NUMA = true;
-
     X86_INTEL_TSX_MODE_AUTO = option true;
 
     ADDRESS_MASKING = false;

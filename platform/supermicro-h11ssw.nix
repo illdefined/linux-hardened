@@ -2,6 +2,7 @@
   targetArch = "znver2";
   platformProfiles = {
     physical = true;
+    numa = true;
   };
 
   platformConfig = { option, lib, hostPlatform }: {
