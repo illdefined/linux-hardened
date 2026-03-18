@@ -579,6 +579,9 @@
     EXT4_USE_FOR_EXT2 = true;
     EXT4_FS_POSIX_ACL = true;
 
+    BTRFS_FS = true;
+    BTRFS_FS_POSIX_ACL = true;
+
     OVERLAY_FS = true;
     OVERLAY_FS_REDIRECT_DIR = true;
     OVERLAY_FS_REDIRECT_ALWAYS_FOLLOW = false;
@@ -610,6 +613,8 @@
     NLS_CODEPAGE_437 = true;
     NLS_ISO8859_1 = true;
     UNICODE = true;
+
+    CRYPTO_ZSTD = true;
   };
 
   fonts = {
