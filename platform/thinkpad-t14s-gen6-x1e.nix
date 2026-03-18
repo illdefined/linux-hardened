@@ -8,8 +8,8 @@
   };
 
   platformFirmware = [
-    "gen70500_gmu.bin"
-    "gen70500_sqe.fw"
+    "qcom/gen70500_gmu.bin"
+    "qcom/gen70500_sqe.fw"
     "qcom/x1e80100/LENOVO/21N1/adsp_dtbs.elf"
     "qcom/x1e80100/LENOVO/21N1/cdsp_dtbs.elf"
     "qcom/x1e80100/LENOVO/21N1/qcadsp8380.mbn"
