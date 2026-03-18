@@ -21,7 +21,6 @@
   platformConfig = { option, lib, hostPlatform }: {
     ARCH_QCOM = true;
 
-    ARM64_64K_PAGES = true;
     NR_CPUS = 12;
     ARM64_EPAN = false;
     ARM64_POE = false;
