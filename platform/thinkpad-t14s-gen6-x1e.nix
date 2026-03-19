@@ -107,6 +107,7 @@
     VIDEO_QCOM_IRIS = true;
 
     DRM_MSM = true;
+    DRM_MSM_DPU = true;
     DRM_MSM_DP = true;
     DRM_MSM_HDMI = true;
     DRM_PANEL_SAMSUNG_ATNA33XC20 = true;
