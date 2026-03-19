@@ -354,7 +354,7 @@
       ZRAM_MULTI_COMP = true;
     };
   } // lib.optionalAttrs hostPlatform.isAarch64 {
-    ARM64_16K_PAGES = true;
+    ARM64_64K_PAGES = true;
   } // lib.optionalAttrs hostPlatform.isx86_64 {
     X86_INTEL_TSX_MODE_AUTO = option true;
 
