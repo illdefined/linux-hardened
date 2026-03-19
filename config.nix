@@ -435,8 +435,6 @@
   power = {
     PM = true;
     ENERGY_MODEL = true;
-    ACPI = true;
-    ACPI_APEI = true;
 
     CPU_FREQ = true;
     CPU_FREQ_STAT = true;
@@ -449,12 +447,6 @@
 
     PCIEASPM = true;
     PCIEASPM_POWER_SUPERSAVE = true;
-
-  } // lib.optionalAttrs hostPlatform.isx86_64 {
-    X86_ACPI_CPUFREQ = true;
-    X86_ACPI_CPUFREQ_CPB = false;
-  } // lib.optionalAttrs (hostPlatform.isAarch64 || hostPlatform.isRiscV64) {
-    ACPI_CPPC_CPUFREQ = true;
   };
 
   framebuffer = {

@@ -30,7 +30,6 @@
     ARM_PSCI_CPUIDLE = true;
     ARM_PSCI_CPUIDLE_DOMAIN = true;
     ARM_QCOM_CPUFREQ_HW = true;
-    ACPI_CPPC_CPUFREQ = false;
 
     VIRTUALIZATION = true;
     KVM = true;
@@ -137,7 +136,6 @@
     TYPEC_QCOM_PMIC = true;
     TYPEC_MUX_GPIO_SBU = true;
     TYPEC_MUX_PS883X = true;
-    UCSI_ACPI = false;
     UCSI_PMIC_GLINK = true;
     TYPEC_TBT_ALTMODE = false;
 

@@ -3,6 +3,7 @@
   platformProfiles = {
     physical = true;
     numa = true;
+    acpi = true;
     tpm = true;
   };
 

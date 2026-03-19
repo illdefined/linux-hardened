@@ -1,8 +1,8 @@
 { option, lib, hostPlatform }: {
   SUSPEND = true;
   WQ_POWER_EFFICIENT_DEFAULT = true;
-  ACPI_BATTERY = true;
-  ACPI_VIDEO = true;
+  ACPI_BATTERY = option true;
+  ACPI_VIDEO = option true;
 
   HOTPLUG_PCI_PCIE = true;
   HOTPLUG_PCI = true;
@@ -30,7 +30,7 @@
   TYPEC_TCPM = true;
   TYPEC_TCPCI = true;
   TYPEC_UCSI = true;
-  UCSI_ACPI = true;
+  UCSI_ACPI = option true;
   TYPEC_DP_ALTMODE = true;
   TYPEC_TBT_ALTMODE = true;
 

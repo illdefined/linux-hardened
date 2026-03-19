@@ -1,9 +1,9 @@
 { option, lib, hostPlatform }: {
-  ACPI_BUTTON = true;
-  ACPI_FAN = true;
-  ACPI_TAD = true;
-  ACPI_THERMAL = true;
-  ACPI_PCI_SLOT = true;
+  ACPI_BUTTON = option true;
+  ACPI_FAN = option true;
+  ACPI_TAD = option true;
+  ACPI_THERMAL = option true;
+  ACPI_PCI_SLOT = option true;
 
   SCSI = true;
   BLK_DEV_SD = true;
@@ -31,6 +31,6 @@
   POWERCAP = true;
 
   RAS = true;
-} // lib.optionalAttrs hostPlatform.isx86_64 {
-  ACPI_PROCESSOR_AGGREGATOR = true;
+} // lib.optionalAttrs hostPlatform.isx86 {
+  ACPI_PROCESSOR_AGGREGATOR = option true;
 }
