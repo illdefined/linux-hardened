@@ -139,6 +139,10 @@
     UCSI_PMIC_GLINK = true;
     TYPEC_TBT_ALTMODE = false;
 
+    MMC_SDHCI = true;
+    MMC_SDHCI_PLTFM = true;
+    MMC_SDHCI_MSM = true;
+
     LEDS_QCOM_LPG = true;
 
     EDAC_QCOM = true;
