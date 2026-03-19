@@ -80,6 +80,7 @@
     SPI_QCOM_GENI = true;
 
     QCOM_TSENS = true;
+    QCOM_SPMI_TEMP_ALARM = true;
     QCOM_LMH = true;
 
     SPMI = true;
@@ -202,6 +203,8 @@
 
     TEE = true;
     QCOMTEE = true;
+
+    IIO = true;
 
     PWM = true;
 
