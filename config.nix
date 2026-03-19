@@ -614,6 +614,7 @@
 
   fonts = {
     FONTS = true;
+    FONT_TER10x18 = true;
     FONT_TER16x32 = true;
   };
 
