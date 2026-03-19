@@ -3,6 +3,7 @@
   platformProfiles = {
     physical = true;
     portable = true;
+    tpm = true;
     wireless = true;
     audio = true;
   };

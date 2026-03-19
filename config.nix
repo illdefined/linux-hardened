@@ -558,12 +558,6 @@
     HW_RANDOM_INTEL = false;
     HW_RANDOM_AMD = false;
     HW_RANDOM_VIA = false;
-
-    TCG_TPM = true;
-    TCG_TPM2_HMAC = true;
-    HW_RANDOM_TPM = true;
-    TCG_TIS = true;
-    TCG_CRB = true;
   };
 
   input = {

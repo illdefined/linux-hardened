@@ -3,6 +3,7 @@
   platformProfiles = {
     physical = true;
     numa = true;
+    tpm = true;
   };
 
   platformConfig = { option, lib, hostPlatform }: {
