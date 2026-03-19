@@ -208,5 +208,12 @@
     INTERCONNECT_QCOM = true;
     INTERCONNECT_QCOM_SC8280XP = true;
     INTERCONNECT_QCOM_X1E80100 = true;
+
+    CORESIGHT = true;
+    CORESIGHT_LINK_AND_SINK_TMC = true;
+    CORESIGHT_STM = true;
+    CORESIGHT_TPDM = true;
+    CORESIGHT_TPDA = true;
+    CORESIGHT_DUMMY = true;
   };
 }
