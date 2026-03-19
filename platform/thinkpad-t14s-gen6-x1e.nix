@@ -162,6 +162,7 @@
     SM_VIDEOCC_8550 = true;
 
     MAILBOX = true;
+    QCOM_CPUCP_MBOX = true;
     QCOM_IPCC = true;
 
     ARM_SMMU_V3 = false;
