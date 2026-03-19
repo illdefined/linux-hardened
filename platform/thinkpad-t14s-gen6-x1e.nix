@@ -56,6 +56,7 @@
     WLAN = true;
     ATH12K = true;
 
+    KEYBOARD_ATKBD = false;
     KEYBOARD_GPIO = true;
 
     INPUT_MOUSEDEV = true;
