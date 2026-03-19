@@ -73,7 +73,7 @@
     I2C_QUP = true;
     I2C_QCOM_GENI = true;
     I2C_HID = true;
-    I2C_HID_OF_ELAN = true;
+    I2C_HID_OF = true;
 
     SPI = true;
     SPI_QUP = true;
