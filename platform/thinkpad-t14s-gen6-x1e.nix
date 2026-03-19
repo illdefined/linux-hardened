@@ -29,7 +29,7 @@
 
     ARM_PSCI_CPUIDLE = true;
     ARM_PSCI_CPUIDLE_DOMAIN = true;
-    ARM_QCOM_CPUFREQ_HW = true;
+    ARM_SCMI_CPUFREQ = true;
 
     VIRTUALIZATION = true;
     KVM = true;
