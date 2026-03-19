@@ -198,6 +198,7 @@
     USB4 = false;
 
     NVMEM_QCOM_QFPROM = true;
+    NVMEM_SPMI_SDAM = true;
 
     TEE = true;
     QCOMTEE = true;
