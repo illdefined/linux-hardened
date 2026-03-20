@@ -46,6 +46,9 @@
 
     QCOM_EBI2 = false;
 
+    QCOM_QSEECOM = true;
+    QCOM_QSEECOM_UEFISECAPP = true;
+
     ARM_SCMI_PROTOCOL = true;
     ARM_SCMI_TRANSPORT_MAILBOX = true;
 
