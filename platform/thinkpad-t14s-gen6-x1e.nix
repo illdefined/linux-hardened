@@ -37,10 +37,14 @@
     SCHED_SMT = false;
     SHADOW_CALL_STACK = true;
 
-    PCIE_QCOM = true;
-
     BT_HCIUART = true;
     BT_HCIUART_QCA = true;
+
+    HOTPLUG_PCI = false;
+    PCIE_QCOM = true;
+    PCI_PWRCTRL_TC9563 = false;
+
+    QCOM_EBI2 = false;
 
     ARM_SCMI_PROTOCOL = true;
     ARM_SCMI_TRANSPORT_MAILBOX = true;
@@ -55,14 +59,12 @@
     WLAN = true;
     ATH12K = true;
 
+    INPUT_MOUSEDEV = true;
+
     KEYBOARD_ATKBD = false;
     KEYBOARD_GPIO = true;
 
-    INPUT_MOUSEDEV = true;
-
     INPUT_MOUSE = true;
-    MOUSE_PS2 = true;
-    MOUSE_PS2_TRACKPOINT = true;
 
     INPUT_MISC = true;
     INPUT_PM8941_PWRKEY = true;
@@ -109,13 +111,18 @@
     VIDEO_QCOM_IRIS = true;
 
     DRM_MSM = true;
+    DRM_MSM_MDP4 = false;
+    DRM_MSM_MDP5 = false;
     DRM_MSM_DPU = true;
     DRM_MSM_DP = true;
+    DRM_MSM_DSI = false;
     DRM_MSM_HDMI = true;
     DRM_PANEL_SAMSUNG_ATNA33XC20 = true;
     DRM_PANEL_EDP = true;
 
     BACKLIGHT_PWM = true;
+
+    SND_PCI = false;
 
     SND_SOC = true;
     SND_SOC_QCOM = true;
@@ -153,9 +160,6 @@
 
     EC_LENOVO_THINKPAD_T14S = true;
 
-    HWSPINLOCK = true;
-    HWSPINLOCK_QCOM = true;
-
     COMMON_CLK = true;
     COMMON_CLK_QCOM = true;
     CLK_X1E80100_CAMCC = true;
@@ -166,6 +170,13 @@
     QCOM_CLK_RPMH = true;
     SC_LPASSCC_8280XP = true;
     SM_VIDEOCC_8550 = true;
+
+    HWSPINLOCK = true;
+    HWSPINLOCK_QCOM = true;
+
+    FSL_ERRATUM_A008585 = false;
+    HISILICON_ERRATUM_161010101 = false;
+    ARM64_ERRATUM_858921 = false;
 
     MAILBOX = true;
     QCOM_CPUCP_MBOX = true;
@@ -193,6 +204,12 @@
     QCOM_APR = true;
     QCOM_ICC_BWMON = true;
 
+    ARM_SCMI_PERF_DOMAIN = false;
+    ARM_SCMI_POWER_DOMAIN = false;
+
+    IIO = true;
+
+    ARM_PMU = false;
     ARM_PMUV3 = true;
 
     USB4 = false;
@@ -202,8 +219,6 @@
 
     TEE = true;
     QCOMTEE = true;
-
-    IIO = true;
 
     PWM = true;
 
