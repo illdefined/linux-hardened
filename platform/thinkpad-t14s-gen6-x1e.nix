@@ -212,6 +212,7 @@
     QCOM_COMMAND_DB = true;
     QCOM_GENI_SE = true;
     QCOM_LLCC = true;
+    QCOM_PD_MAPPER = true;
     QCOM_PMIC_GLINK = true;
     QCOM_RPMH = true;
     QCOM_SMEM = true;
