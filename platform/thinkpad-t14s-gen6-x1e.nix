@@ -211,7 +211,7 @@
 
     IIO = true;
 
-    ARM_PMU = false;
+    ARM_PMU = true;
     ARM_PMUV3 = true;
 
     USB4 = false;
