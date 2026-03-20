@@ -224,6 +224,9 @@
 
     QCOM_PDC = true;
 
+    RESET_GPIO = true;
+    RESET_SCMI = false;
+
     PHY_SNPS_EUSB2 = true;
     PHY_NXP_PTN3222 = true;
     PHY_QCOM_EDP = true;
