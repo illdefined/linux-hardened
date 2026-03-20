@@ -47,6 +47,8 @@
 
     QCOM_EBI2 = false;
 
+    EFI_DISABLE_RUNTIME = true;
+
     QCOM_QSEECOM = true;
     QCOM_QSEECOM_UEFISECAPP = true;
 
