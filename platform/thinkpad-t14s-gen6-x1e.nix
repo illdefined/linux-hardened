@@ -222,6 +222,8 @@
 
     PWM = true;
 
+    QCOM_PDC = true;
+
     PHY_SNPS_EUSB2 = true;
     PHY_NXP_PTN3222 = true;
     PHY_QCOM_EDP = true;
