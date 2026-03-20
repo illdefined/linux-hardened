@@ -42,6 +42,8 @@
     BT_HCIUART = true;
     BT_HCIUART_QCA = true;
 
+    CMA = true;
+
     HOTPLUG_PCI = false;
     PCIE_QCOM = true;
     PCI_PWRCTRL_TC9563 = false;
