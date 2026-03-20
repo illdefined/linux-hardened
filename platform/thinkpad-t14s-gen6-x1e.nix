@@ -118,7 +118,10 @@
 
     MEDIA_PLATFORM_SUPPORT = true;
     MEDIA_PLATFORM_DRIVERS = true;
+    V4L_PLATFORM_DRIVERS = true;
+    VIDEO_QCOM_CAMSS = true;
     VIDEO_QCOM_IRIS = true;
+    VIDEO_OV02C10 = true;
 
     DRM_MSM = true;
     DRM_MSM_MDP4 = false;
