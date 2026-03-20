@@ -100,6 +100,8 @@
 
     BATTERY_QCOM_BATTMGR = true;
 
+    ARM_SBSA_WATCHDOG = true;
+
     MFD_SPMI_PMIC = true;
 
     REGULATOR = true;
