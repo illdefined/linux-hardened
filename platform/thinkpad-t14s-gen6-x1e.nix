@@ -91,7 +91,6 @@
     SPMI = true;
 
     PINCTRL_MSM = true;
-    PINCTRL_SM8550 = true;
     PINCTRL_X1E80100 = true;
     PINCTRL_QCOM_SPMI_PMIC = true;
     PINCTRL_LPASS_LPI = true;
