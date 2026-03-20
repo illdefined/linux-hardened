@@ -198,6 +198,7 @@
     SOUNDWIRE = true;
     SOUNDWIRE_QCOM = true;
 
+    QCOM_AOSS_QMP = true;
     QCOM_COMMAND_DB = true;
     QCOM_GENI_SE = true;
     QCOM_LLCC = true;
