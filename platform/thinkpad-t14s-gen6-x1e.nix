@@ -223,9 +223,6 @@
     QCOM_APR = true;
     QCOM_ICC_BWMON = true;
 
-    ARM_SCMI_PERF_DOMAIN = false;
-    ARM_SCMI_POWER_DOMAIN = false;
-
     IIO = true;
 
     ARM_PMU = true;
