@@ -413,6 +413,7 @@
     PCI = true;
     PCIEPORTBUS = true;
     PCIEAER = true;
+    PCIE_DPC = true;
     PCI_MSI = true;
     PCIE_BUS_PERFORMANCE = true;
 
