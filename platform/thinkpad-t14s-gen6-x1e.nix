@@ -255,6 +255,8 @@
     INTERCONNECT_QCOM = true;
     INTERCONNECT_QCOM_X1E80100 = true;
 
+    CRYPTO_DEV_QCOM_RNG = true;
+
     CORESIGHT = true;
     CORESIGHT_LINK_AND_SINK_TMC = true;
     CORESIGHT_STM = true;
