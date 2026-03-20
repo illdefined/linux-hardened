@@ -213,6 +213,7 @@
     QCOM_RPMH = true;
     QCOM_SMEM = true;
     QCOM_SMP2P = true;
+    QCOM_SOCINFO = true;
     QCOM_APR = true;
     QCOM_ICC_BWMON = true;
 
