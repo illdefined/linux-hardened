@@ -91,6 +91,7 @@
     SPI_QUP = true;
     SPI_QCOM_GENI = true;
 
+    DEVFREQ_THERMAL = true;
     QCOM_TSENS = true;
     QCOM_SPMI_TEMP_ALARM = true;
     QCOM_LMH = true;
@@ -151,6 +152,9 @@
     SND_SOC_LPASS_TX_MACRO = true;
 
     QCOM_RPMHPD = true;
+
+    PM_DEVFREQ = true;
+    DEVFREQ_GOV_SIMPLE_ONDEMAND = true;
 
     HID_MULTITOUCH = true;
 
