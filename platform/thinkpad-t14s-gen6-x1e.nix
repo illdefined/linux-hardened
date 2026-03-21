@@ -264,6 +264,9 @@
     CRYPTO_DEV_QCE = true;
     CRYPTO_DEV_QCOM_RNG = true;
 
+    DMA_CMA = true;
+    CMA_SIZE_MBYTES = 128;
+
     CORESIGHT = true;
     CORESIGHT_LINK_AND_SINK_TMC = true;
     CORESIGHT_STM = true;
