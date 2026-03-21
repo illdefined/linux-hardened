@@ -342,6 +342,7 @@
 
     DMADEVICES = true;
     ASYNC_TX_DMA = option true;
+    UDMABUF = true;
 
     zram = {
       SWAP = true;
