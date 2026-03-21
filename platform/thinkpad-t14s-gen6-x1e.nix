@@ -82,6 +82,7 @@
 
     I2C = true;
     I2C_QUP = true;
+    I2C_QCOM_CCI = true;
     I2C_QCOM_GENI = true;
     I2C_HID = true;
     I2C_HID_OF = true;
