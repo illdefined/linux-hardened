@@ -5,11 +5,17 @@
     portable = true;
     wireless = true;
     audio = true;
+    tpm = true;
   };
 
   platformFirmware = [
+    "ath12k/WCN7850/hw2.0/amss.bin"
+    "ath12k/WCN7850/hw2.0/board-2.bin"
+    "ath12k/WCN7850/hw2.0/m3.bin"
     "qcom/gen70500_gmu.bin"
     "qcom/gen70500_sqe.fw"
+    "qcom/x1e80100/gen70500_zap.mbn"
+    "qcom/x1e80100/qupv3fw.elf"
     "qcom/x1e80100/LENOVO/21N1/X1E80100-LENOVO-Thinkpad-T14s-tplg.bin"
     "qcom/x1e80100/LENOVO/21N1/adsp_dtbs.elf"
     "qcom/x1e80100/LENOVO/21N1/cdsp_dtbs.elf"
@@ -44,11 +50,11 @@
 
     CMA = true;
 
-    HOTPLUG_PCI = false;
+    #HOTPLUG_PCI = false;
     PCIE_QCOM = true;
-    PCI_PWRCTRL_TC9563 = false;
+    #PCI_PWRCTRL_TC9563 = false;
 
-    QCOM_EBI2 = false;
+    #QCOM_EBI2 = false;
 
     EFI_DISABLE_RUNTIME = true;
 
@@ -71,7 +77,7 @@
 
     INPUT_MOUSEDEV = true;
 
-    KEYBOARD_ATKBD = false;
+    #KEYBOARD_ATKBD = false;
     KEYBOARD_GPIO = true;
 
     INPUT_MOUSE = true;
@@ -129,12 +135,12 @@
     VIDEO_OV02C10 = true;
 
     DRM_MSM = true;
-    DRM_MSM_MDP4 = false;
-    DRM_MSM_MDP5 = false;
+    #DRM_MSM_MDP4 = false;
+    #DRM_MSM_MDP5 = false;
     DRM_MSM_DPU = true;
     DRM_MSM_DP = true;
-    DRM_MSM_DSI = false;
-    DRM_MSM_HDMI = false;
+    #DRM_MSM_DSI = false;
+    #DRM_MSM_HDMI = false;
     DRM_DISPLAY_CONNECTOR = true;
     DRM_PANEL_SAMSUNG_ATNA33XC20 = true;
     DRM_PANEL_EDP = true;
@@ -198,9 +204,9 @@
     HWSPINLOCK = true;
     HWSPINLOCK_QCOM = true;
 
-    FSL_ERRATUM_A008585 = false;
-    HISILICON_ERRATUM_161010101 = false;
-    ARM64_ERRATUM_858921 = false;
+    #FSL_ERRATUM_A008585 = false;
+    #HISILICON_ERRATUM_161010101 = false;
+    #ARM64_ERRATUM_858921 = false;
 
     MAILBOX = true;
     QCOM_CPUCP_MBOX = true;
@@ -249,7 +255,7 @@
     QCOM_PDC = true;
 
     RESET_GPIO = true;
-    RESET_SCMI = false;
+    #RESET_SCMI = false;
 
     PHY_SNPS_EUSB2 = true;
     PHY_NXP_PTN3222 = true;
@@ -275,5 +281,15 @@
     CORESIGHT_TPDM = true;
     CORESIGHT_TPDA = true;
     CORESIGHT_DUMMY = true;
+
+    QRTR_SMD = true;
+    PINCTRL_SINGLE = true;
+    ARM_SMMU = true;
+    QCOM_SYSMON = true;
+    RPMSG_QCOM_GLINK_SMEM = true;
+    PINCTRL_SC8280XP = true;
+    QCOM_SPMI_ADC5 = true;
+    INTERCONNECT_QCOM_SC8280XP = true;
+    DRM_MALI_DISPLAY = true;
   };
 }

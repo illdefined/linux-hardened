@@ -17,7 +17,7 @@
 
     JUMP_LABEL = true;
 
-    LTO_CLANG_FULL = true;
+    #LTO_CLANG_FULL = true;
   };
 
   boot = {
@@ -111,7 +111,7 @@
     CPU_SUP_CENTAUR = false;
     CPU_SUP_ZHAOXIN = false;
   } // lib.optionalAttrs hostPlatform.isAarch64 {
-    ARM64_VA_BITS_48 = true;
+    #ARM64_VA_BITS_48 = true;
     ARM64_PAN = true;
     ARM64_USE_LSE_ATOMICS = true;
     ARM64_CNP = true;
@@ -355,7 +355,7 @@
       ZRAM_MULTI_COMP = true;
     };
   } // lib.optionalAttrs hostPlatform.isAarch64 {
-    ARM64_64K_PAGES = true;
+    #ARM64_64K_PAGES = true;
   } // lib.optionalAttrs hostPlatform.isx86_64 {
     X86_INTEL_TSX_MODE_AUTO = option true;
 
@@ -407,7 +407,7 @@
 
     IO_DELAY_NONE = true;
   } // lib.optionalAttrs hostPlatform.isAarch64 {
-    ARM_SMMU_V3 = true;
+    #ARM_SMMU_V3 = true;
   };
 
   bus = {
