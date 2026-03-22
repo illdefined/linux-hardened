@@ -172,6 +172,7 @@
     MMC_SDHCI_PLTFM = true;
     MMC_SDHCI_MSM = true;
 
+    LEDS_QCOM_FLASH = true;
     LEDS_QCOM_LPG = true;
 
     EDAC_QCOM = true;
