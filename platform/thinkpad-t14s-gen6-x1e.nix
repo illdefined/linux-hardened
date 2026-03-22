@@ -205,7 +205,7 @@
     QCOM_CPUCP_MBOX = true;
     QCOM_IPCC = true;
 
-    ARM_SMMU_V3 = false;
+    ARM_SMMU_V3 = true;
     QCOM_IOMMU = true;
 
     REMOTEPROC = true;
