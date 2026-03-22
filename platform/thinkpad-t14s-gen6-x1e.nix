@@ -64,6 +64,7 @@
     NVME_HWMON = true;
 
     QCOM_FASTRPC = true;
+    SRAM = true;
 
     WLAN = true;
     ATH12K = true;
