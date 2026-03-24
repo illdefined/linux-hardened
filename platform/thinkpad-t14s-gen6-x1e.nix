@@ -213,7 +213,7 @@
     QCOM_Q6V5_ADSP = true;
     QCOM_Q6V5_PAS = true;
 
-    RPMSG_QCOM_GLINK_RPM = true;
+    RPMSG_QCOM_GLINK_SMEM = true;
 
     SOUNDWIRE = true;
     SOUNDWIRE_QCOM = true;
