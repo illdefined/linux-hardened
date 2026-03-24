@@ -75,15 +75,15 @@ in stdenv.mkDerivation (finalAttrs: {
   __structuredAttrs = true;
 
   pname = "linux-hardened";
-  version = "6.19.9-hardened1";
+  version = "7.0-rc5";
 
   modDirVersion = lib.versions.pad 3 finalAttrs.version;
 
   src = fetchFromGitHub {
-    owner = "anthraxx";
-    repo = "linux-hardened";
+    owner = "gregkh";
+    repo = "linux";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-dzQSYYivkH+SFMIVca9BJD5kEr/5DQmCKSIjj2cLVDA=";
+    hash = "sha256-UN1xOwSyn5YzdxQzEF6vTKev6vtN3iE2aiv7OT7TBAM=";
   };
 
   strictDeps = true;
@@ -108,8 +108,8 @@ in stdenv.mkDerivation (finalAttrs: {
   ];
 
   patches = [
-    ./io_uring-sysctl.patch
-    ./x86-vdso32-disable-ipra.patch
+    #./io_uring-sysctl.patch
+    #./x86-vdso32-disable-ipra.patch
   ];
 
   enableParallelBuilding = true;

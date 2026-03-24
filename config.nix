@@ -112,8 +112,8 @@
     CPU_SUP_ZHAOXIN = false;
   } // lib.optionalAttrs hostPlatform.isAarch64 {
     ARM64_VA_BITS_48 = true;
-    ARM64_PAN = true;
-    ARM64_USE_LSE_ATOMICS = true;
+    #ARM64_PAN = true;
+    #ARM64_USE_LSE_ATOMICS = true;
     ARM64_CNP = true;
     ARM64_PTR_AUTH = true;
     ARM64_EPAN = true;
@@ -147,8 +147,8 @@
     SLAB_FREELIST_RANDOM = true;
     SLAB_FREELIST_HARDENED = true;
     SLAB_BUCKETS = true;
-    SLAB_CANARY = true;
-    SLUB_CPU_PARTIAL = true;
+    #SLAB_CANARY = true;
+    #SLUB_CPU_PARTIAL = true;
     RANDOM_KMALLOC_CACHES = true;
 
     # Page allocator
@@ -159,7 +159,7 @@
     # Zero call‐used registers
     ZERO_CALL_USED_REGS = true;
 
-    PAGE_SANITIZE_VERIFY = true;
+    #PAGE_SANITIZE_VERIFY = true;
 
     # Adverse interaction with Nouveau driver
     SLAB_SANITIZE_VERIFY = false;
@@ -183,7 +183,7 @@
     # Memory safety error detection
     KFENCE = true;
     KFENCE_DEFERRABLE = true;
-    KFENCE_BUG_ON_DATA_CORRUPTION = true;
+    #KFENCE_BUG_ON_DATA_CORRUPTION = true;
 
     PANIC_ON_OOPS = true;
     PANIC_TIMEOUT = (-1);
@@ -193,8 +193,8 @@
 
     SECURITY_DMESG_RESTRICT = true;
     PROC_MEM_FORCE_PTRACE = true;
-    SECURITY_PERF_EVENTS_RESTRICT = true;
-    SECURITY_TIOCSTI_RESTRICT = true;
+    #SECURITY_PERF_EVENTS_RESTRICT = true;
+    #SECURITY_TIOCSTI_RESTRICT = true;
     SECURITY = true;
     SECURITY_NETWORK = true;
     SECURITY_SELINUX = false;
