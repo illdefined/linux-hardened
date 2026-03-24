@@ -296,7 +296,7 @@ in stdenv.mkDerivation (finalAttrs: {
 
     # Adjust binary search paths for Nix
     find . -type f \( -name '*.[hc]' -o -name 'Kconfig' -o -name 'Kconfig.*' \) -print0 \
-      | xargs -0 -r sed -E -i \
+      | xargs -0 -n "$((65536 / NIX_BUILD_CORES))" -P "$NIX_BUILD_CORES" -r sed -E -i \
         -e 's;"/sbin/(poweroff|reboot)";"/run/current-system/sw/bin/systemctl \1";g' \
         -e 's;"(PATH=)(/usr)?/s?bin(:(/usr)?/s?bin)*";"\1/run/current-system/sw/bin";g' \
         -e 's;"/s?bin/([^"/]+)";"/run/current-system/sw/bin/\1";g'
