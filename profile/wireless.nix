@@ -26,6 +26,7 @@
   KEYS = true;
   CRYPTO_USER_API_SKCIPHER = true;
   CRYPTO_USER_API_HASH = true;
+  CRYPTO_USER_API_AEAD = true;
   CRYPTO_HMAC = true;
   CRYPTO_CMAC = true;
   CRYPTO_MD4 = true;
@@ -46,9 +47,13 @@
 } // lib.optionalAttrs hostPlatform.isx86_64 {
   CRYPTO_AES_NI_INTEL = option true;
   CRYPTO_DES3_EDE_X86_64 = option true;
+  CRYPTO_GHASH_CLMUL_NI_INTEL = option true;
 } // lib.optionalAttrs hostPlatform.isRiscV64 {
   CRYPTO_AES_RISCV64 = option true;
+  CRYPTO_GHASH_RISCV64 = option true;
 } // lib.optionalAttrs hostPlatform.isAarch64 {
+  CRYPTO_GHASH_ARM64_CE = option true;
   CRYPTO_AES_ARM64_CE = option true;
   CRYPTO_AES_ARM64_CE_BLK = option true;
+  CRYPTO_AES_ARM64_CE_CCM = option true;
 }
