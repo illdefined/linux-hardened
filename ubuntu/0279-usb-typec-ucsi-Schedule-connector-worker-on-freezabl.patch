@@ -1,0 +1,39 @@
+From 213312049a68efb4c86385ecd6c8773e0e8e6c91 Mon Sep 17 00:00:00 2001
+From: Abel Vesa <abel.vesa@linaro.org>
+Date: Wed, 5 Feb 2025 13:45:05 +0200
+Subject: [PATCH 279/382] usb: typec: ucsi: Schedule connector worker on
+ freezable workqueue
+
+Currently, the UCSI connector worker is scheduled on the non-freezable
+system workqueue. During system suspend, on a plug/unplug event, the
+worker can run before the devices have actually resumed. The UCSI
+instances can implement operations that might need to do some HW accesses
+while the devices are still suspended.
+
+Scheduling the USCI connector worker on the freezable system workqueue
+instead will ensure the devices are resumed by the time the worker is
+scheduled to run.
+
+Signed-off-by: Abel Vesa <abel.vesa@linaro.org>
+Link: https://patch.msgid.link/20250205-ucsi-schedule-conn-worker-on-freezable-wq-v1-1-107d1356b77b@linaro.org
+Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+---
+ drivers/usb/typec/ucsi/ucsi.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/usb/typec/ucsi/ucsi.c b/drivers/usb/typec/ucsi/ucsi.c
+index a7b388dc7fa0..9e8baa895c58 100644
+--- a/drivers/usb/typec/ucsi/ucsi.c
++++ b/drivers/usb/typec/ucsi/ucsi.c
+@@ -1353,7 +1353,7 @@ void ucsi_connector_change(struct ucsi *ucsi, u8 num)
+ 	}
+ 
+ 	if (!test_and_set_bit(EVENT_PENDING, &ucsi->flags))
+-		schedule_work(&con->work);
++		queue_work(system_freezable_wq, &con->work);
+ }
+ EXPORT_SYMBOL_GPL(ucsi_connector_change);
+ 
+-- 
+2.53.0
+
