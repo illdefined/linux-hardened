@@ -110,7 +110,7 @@ in stdenv.mkDerivation (finalAttrs: {
   patches = [
     ./io_uring-sysctl.patch
     ./x86-vdso32-disable-ipra.patch
-  ];
+  ] ++ (lib.fileset.fileFilter (file: file.hasExt "patch") ./ubuntu |> lib.fileset.toList);
 
   enableParallelBuilding = true;
 
