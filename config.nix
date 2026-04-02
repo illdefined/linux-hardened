@@ -581,6 +581,8 @@
     OVERLAY_FS_XINO_AUTO = true;
     OVERLAY_FS_METACOPY = true;
 
+    UDF_FS = true;
+
     MSDOS_FS = true;
     VFAT_FS = true;
     FAT_DEFAULT_UTF8 = true;
@@ -605,6 +607,7 @@
     NLS = true;
     NLS_CODEPAGE_437 = true;
     NLS_ISO8859_1 = true;
+    NLS_UTF8 = true;
     UNICODE = true;
 
     CRYPTO_ZSTD = true;
