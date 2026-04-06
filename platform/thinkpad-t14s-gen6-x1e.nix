@@ -8,9 +8,9 @@
   };
 
   platformFirmware = [
-    "ath12k/hw2.0/amss.bin"
-    "ath12k/hw2.0/board-2.bin"
-    "ath12k/hw2.0/m3.bin"
+    "ath12k/WCN7850/hw2.0/amss.bin"
+    "ath12k/WCN7850/hw2.0/board-2.bin"
+    "ath12k/WCN7850/hw2.0/m3.bin"
     "qcom/X1E80100-LENOVO-Thinkpad-T14s-tplg.bin"
     "qcom/X1E80100-Romulus-tplg.bin"
     "qcom/adsp.mbn"
