@@ -23,7 +23,9 @@
     ARCH_QCOM = true;
 
     NR_CPUS = 12;
+    ARM64_PMEM = true;
     ARM64_PTR_AUTH = false;
+    ARM64_EPAN = true;
     ARM64_POE = false;
     ARM64_HAFT = false;
     ARM64_GCS = false;
