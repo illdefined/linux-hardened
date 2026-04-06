@@ -117,6 +117,7 @@
     SPMI = true;
 
     PINCTRL_MSM = true;
+    PINCTRL_SC8280XP = true;
     PINCTRL_X1E80100 = true;
     PINCTRL_QCOM_SPMI_PMIC = true;
     PINCTRL_LPASS_LPI = true;
@@ -281,6 +282,8 @@
 
     INTERCONNECT = true;
     INTERCONNECT_QCOM = true;
+    INTERCONNECT_QCOM_OSM_L3 = true;
+    INTERCONNECT_QCOM_SC8280XP = true;
     INTERCONNECT_QCOM_X1E80100 = true;
 
     CRYPTO_DEV_QCE = true;
@@ -328,5 +331,27 @@
     QCOM_SPM = true;
     QCOM_PBS = true;
     QRTR_SMD = true;
+    QCOM_SPMI_ADC_TM5 = true;
+
+    FB = true;
+    FB_EFI = true;
+
+    I2C_HID_OF_ELAN = true;
+
+    SCSI_UFSHCD = true;
+    SCSI_UFSHCD_PLATFORM = true;
+    SCSI_UFS_QCOM = true;
+
+    QCOM_IOMMU = true;
+
+    QCOM_SPMI_ADC5 = true;
+    RESET_QCOM_AOSS = true;
+
+    PHY_QCOM_USB_SNPS_FEMTO_V2 = true;
+
+    SC_GPUCC_8280XP = true;
+    SC_DISPCC_8280XP = true;
+    SC_CAMCC_8280XP = true;
+    SC_GCC_8280XP = true;
   };
 }
