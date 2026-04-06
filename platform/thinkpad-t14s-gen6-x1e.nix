@@ -324,5 +324,9 @@
     PINCTRL_SINGLE = true;
     I2C_MUX_GPIO = true;
     SPI_MUX = true;
+
+    QCOM_OCMEM = true;
+    QCOM_SPM = true;
+    QCOM_PBS = true;
   };
 }
