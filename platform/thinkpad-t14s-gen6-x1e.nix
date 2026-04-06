@@ -332,5 +332,6 @@
     QCOM_OCMEM = true;
     QCOM_SPM = true;
     QCOM_PBS = true;
+    QRTR_SMD = true;
   };
 }
