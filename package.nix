@@ -19,6 +19,7 @@ lib.makeOverridable ({
     linux-firmware
     sof-firmware
     wireless-regdb
+    ./firmware
   ]),
   platformFirmware ? [ ],
   extraFirmware ? [ ],
@@ -45,6 +46,7 @@ let
     name = "linux-firmware";
     pathsToLink = [ "/lib/firmware" ];
     paths = firmwarePackages;
+    ignoreCollisions = true;
   } + "/lib/firmware";
 
   config = let
