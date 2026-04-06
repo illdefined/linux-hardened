@@ -114,6 +114,7 @@
     BATTERY_QCOM_BATTMGR = true;
 
     WATCHDOG = true;
+    ARM_SBSA_WATCHDOG = true;
     QCOM_WDT = true;
 
     MFD_SPMI_PMIC = true;
