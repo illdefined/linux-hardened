@@ -256,6 +256,7 @@
     PHY_SNPS_EUSB2 = true;
     PHY_NXP_PTN3222 = true;
     PHY_QCOM_EDP = true;
+    PHY_QCOM_MIPI_CSI2 = true;
     PHY_QCOM_QMP = true;
     PHY_QCOM_EUSB2_REPEATER = true;
 
