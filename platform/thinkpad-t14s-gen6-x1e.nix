@@ -178,7 +178,6 @@
 
     RTC_DRV_PM8XXX = true;
 
-    QCOM_BAM_DMA = true;
     QCOM_GPI_DMA = true;
 
     EC_LENOVO_THINKPAD_T14S = true;
