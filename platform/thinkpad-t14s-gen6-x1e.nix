@@ -8,11 +8,27 @@
   };
 
   platformFirmware = [
+    "ath12k/hw2.0/amss.bin"
+    "ath12k/hw2.0/board-2.bin"
+    "ath12k/hw2.0/m3.bin"
+    "qcom/X1E80100-LENOVO-Thinkpad-T14s-tplg.bin"
+    "qcom/X1E80100-Romulus-tplg.bin"
+    "qcom/adsp.mbn"
+    "qcom/adsp_dtb.mbn"
+    "qcom/cdsp.mbn"
+    "qcom/cdsp_dtb.mbn"
     "qcom/gen70500_gmu.bin"
     "qcom/gen70500_sqe.fw"
+    "qcom/gen70500_zap.mbn"
+    "qcom/qupv3fw.elf"
     "qcom/x1e80100/LENOVO/21N1/X1E80100-LENOVO-Thinkpad-T14s-tplg.bin"
     "qcom/x1e80100/LENOVO/21N1/adsp_dtbs.elf"
+    "qcom/x1e80100/LENOVO/21N1/adspr.jsn"
+    "qcom/x1e80100/LENOVO/21N1/adsps.jsn"
+    "qcom/x1e80100/LENOVO/21N1/adspua.jsn"
+    "qcom/x1e80100/LENOVO/21N1/battmgr.jsn"
     "qcom/x1e80100/LENOVO/21N1/cdsp_dtbs.elf"
+    "qcom/x1e80100/LENOVO/21N1/cdspr.jsn"
     "qcom/x1e80100/LENOVO/21N1/qcadsp8380.mbn"
     "qcom/x1e80100/LENOVO/21N1/qccdsp8380.mbn"
     "qcom/x1e80100/LENOVO/21N1/qcdxkmsuc8380.mbn"
@@ -38,18 +54,18 @@
     KVM = true;
 
     SCHED_SMT = false;
-    SHADOW_CALL_STACK = true;
+    #SHADOW_CALL_STACK = true;
 
     BT_HCIUART = true;
     BT_HCIUART_QCA = true;
 
     CMA = true;
 
-    HOTPLUG_PCI = false;
+    #HOTPLUG_PCI = false;
     PCIE_QCOM = true;
     PCI_PWRCTRL_TC9563 = false;
 
-    QCOM_EBI2 = false;
+    #QCOM_EBI2 = false;
 
     EFI_DISABLE_RUNTIME = true;
 
@@ -72,7 +88,7 @@
 
     INPUT_MOUSEDEV = true;
 
-    KEYBOARD_ATKBD = false;
+    #KEYBOARD_ATKBD = false;
     KEYBOARD_GPIO = true;
 
     INPUT_MOUSE = true;
@@ -200,15 +216,16 @@
     HWSPINLOCK = true;
     HWSPINLOCK_QCOM = true;
 
-    FSL_ERRATUM_A008585 = false;
-    HISILICON_ERRATUM_161010101 = false;
-    ARM64_ERRATUM_858921 = false;
+    #FSL_ERRATUM_A008585 = false;
+    #HISILICON_ERRATUM_161010101 = false;
+    #ARM64_ERRATUM_858921 = false;
 
     MAILBOX = true;
     QCOM_CPUCP_MBOX = true;
     QCOM_IPCC = true;
 
     ARM_SMMU = true;
+    ARM_SMMU_QCOM = true;
     ARM_SMMU_V3 = true;
 
     REMOTEPROC = true;
@@ -278,5 +295,21 @@
     CORESIGHT_TPDM = true;
     CORESIGHT_TPDA = true;
     CORESIGHT_DUMMY = true;
+
+    # testing
+    PCIEASPM_POWER_SUPERSAVE = false;
+    PCIEASPM_DEFAULT = true;
+
+    PCIE_BUS_PERFORMANCE = false;
+    PCIE_BUS_DEFAULT = true;
+
+    QCOM_SMSM = true;
+
+    MFD_QCOM_RPM = true;
+    REGULATOR_QCOM_RPM = true;
+    QCOM_CLK_RPM = true;
+
+    IOMMU_IO_PGTABLE_ARMV7S = true;
+    ARM_SMMU_V3_SVA = true;
   };
 }
