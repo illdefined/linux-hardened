@@ -17,7 +17,7 @@
 
     JUMP_LABEL = true;
 
-    LTO_CLANG_FULL = true;
+    #LTO_CLANG_FULL = true;
   };
 
   boot = {
@@ -135,7 +135,7 @@
     VMAP_STACK = true;
     RANDOMIZE_KSTACK_OFFSET = true;
     RANDOMIZE_KSTACK_OFFSET_DEFAULT = true;
-    INIT_STACK_ALL_ZERO = true;
+    INIT_STACK_ALL_ZERO = false;
 
     STRICT_KERNEL_RWX = true;
 
@@ -154,12 +154,12 @@
     # Page allocator
     SHUFFLE_PAGE_ALLOCATOR = true;
     COMPAT_BRK = false;
-    INIT_ON_FREE_DEFAULT_ON = true;
+    INIT_ON_FREE_DEFAULT_ON = false;
 
     # Zero call‐used registers
-    ZERO_CALL_USED_REGS = true;
+    ZERO_CALL_USED_REGS = false;
 
-    PAGE_SANITIZE_VERIFY = true;
+    PAGE_SANITIZE_VERIFY = false;
 
     # Adverse interaction with Nouveau driver
     SLAB_SANITIZE_VERIFY = false;
@@ -174,16 +174,16 @@
     DEBUG_FS = false;
 
     # Undefined behaviour sanitiser
-    UBSAN = true;
+    UBSAN = false;
 
     # User page table sanity checks
-    PAGE_TABLE_CHECK = true;
-    PAGE_TABLE_CHECK_ENFORCED = true;
+    PAGE_TABLE_CHECK = false;
+    PAGE_TABLE_CHECK_ENFORCED = false;
 
     # Memory safety error detection
-    KFENCE = true;
-    KFENCE_DEFERRABLE = true;
-    KFENCE_BUG_ON_DATA_CORRUPTION = true;
+    KFENCE = false;
+    #KFENCE_DEFERRABLE = true;
+    #KFENCE_BUG_ON_DATA_CORRUPTION = true;
 
     PANIC_ON_OOPS = true;
     PANIC_TIMEOUT = (-1);
@@ -204,8 +204,8 @@
     LOCK_DOWN_KERNEL_FORCE_CONFIDENTIALITY = true;
     SECURITY_LANDLOCK = true;
 
-    LIST_HARDENED = true;
-    BUG_ON_DATA_CORRUPTION = true;
+    LIST_HARDENED = false;
+    #BUG_ON_DATA_CORRUPTION = true;
 
   } // lib.optionalAttrs hostPlatform.isx86_64 {
     X86_UMIP = true;

@@ -216,7 +216,7 @@ in stdenv.mkDerivation (finalAttrs: {
     KCFLAGS = lib.optionals (targetTune != null) [
       "-mtune=${targetTune}"
     ] ++ map (flag: "-mllvm=${flag}") [
-        "--enable-gvn-hoist"
+        /*"--enable-gvn-hoist"
         "--enable-ipra"
         "--enable-merge-functions"
 
@@ -231,7 +231,7 @@ in stdenv.mkDerivation (finalAttrs: {
         "--polly-run-dce"
         "--polly-run-inliner"
         "--polly-matmul-opt"
-        "--polly-tc-opt"
+        "--polly-tc-opt"*/
     ] |> toString;
 
     KRUSTFLAGS = [
