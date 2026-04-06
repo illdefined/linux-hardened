@@ -204,7 +204,7 @@
     LOCK_DOWN_KERNEL_FORCE_CONFIDENTIALITY = true;
     SECURITY_LANDLOCK = true;
 
-    LIST_HARDENED = false;
+    #LIST_HARDENED = true;
     #BUG_ON_DATA_CORRUPTION = true;
 
   } // lib.optionalAttrs hostPlatform.isx86_64 {
