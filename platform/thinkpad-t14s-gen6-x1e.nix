@@ -137,6 +137,7 @@
     DRM_MSM_DSI = false;
     DRM_MSM_HDMI = false;
     DRM_DISPLAY_CONNECTOR = true;
+    DRM_SIMPLE_BRIDGE = true;
     DRM_PANEL_SAMSUNG_ATNA33XC20 = true;
     DRM_PANEL_EDP = true;
 
