@@ -314,7 +314,6 @@
 
     # even wilder
     REGULATOR_QCOM_SPMI = true;
-    INTERCONNECT_QCOM_SMD_RPM = true;
     QCOM_CLK_SMD_RPM = true;
     QCOM_RPMPD = true;
     QCOM_SMD_RPM = true;
