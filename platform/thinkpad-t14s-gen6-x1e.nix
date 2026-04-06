@@ -321,5 +321,8 @@
     REGULATOR_QCOM_SMD_RPM = true;
     RPMSG_QCOM_GLINK_RPM = true;
     RPMSG_QCOM_SMD = true;
+    PINCTRL_SINGLE = true;
+    I2C_MUX_GPIO = true;
+    SPI_MUX = true;
   };
 }
