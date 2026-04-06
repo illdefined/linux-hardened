@@ -311,5 +311,15 @@
 
     IOMMU_IO_PGTABLE_ARMV7S = true;
     ARM_SMMU_V3_SVA = true;
+
+    # even wilder
+    REGULATOR_QCOM_SPMI = true;
+    INTERCONNECT_QCOM_SMD_RPM = true;
+    QCOM_CLK_SMD_RPM = true;
+    QCOM_RPMPD = true;
+    QCOM_SMD_RPM = true;
+    REGULATOR_QCOM_SMD_RPM = true;
+    RPMSG_QCOM_GLINK_RPM = true;
+    RPMSG_QCOM_SMD = true;
   };
 }
