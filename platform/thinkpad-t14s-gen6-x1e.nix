@@ -147,12 +147,12 @@
     VIDEO_OV02C10 = true;
 
     DRM_MSM = true;
-    DRM_MSM_MDP4 = false;
-    DRM_MSM_MDP5 = false;
+    #DRM_MSM_MDP4 = false;
+    #DRM_MSM_MDP5 = false;
     DRM_MSM_DPU = true;
     DRM_MSM_DP = true;
-    DRM_MSM_DSI = false;
-    DRM_MSM_HDMI = false;
+    #DRM_MSM_DSI = false;
+    #DRM_MSM_HDMI = false;
     DRM_DISPLAY_CONNECTOR = true;
     DRM_SIMPLE_BRIDGE = true;
     DRM_PANEL_SAMSUNG_ATNA33XC20 = true;
