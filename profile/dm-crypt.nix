@@ -19,7 +19,6 @@
 } // lib.optionalAttrs hostPlatform.isRiscV64 {
   CRYPTO_AES_RISCV64 = true;
 } // lib.optionalAttrs hostPlatform.isAarch64 {
-  CRYPTO_AES_ARM64 = true;
   CRYPTO_AES_ARM64_CE = true;
   CRYPTO_AES_ARM64_CE_BLK = true;
   CRYPTO_AES_ARM64_NEON_BLK = true;
