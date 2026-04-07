@@ -76,16 +76,16 @@ let
 in stdenv.mkDerivation (finalAttrs: {
   __structuredAttrs = true;
 
-  pname = "linux-hardened";
-  version = "6.19.10-hardened1";
+  pname = "linux";
+  version = "7.0-rc6";
 
   modDirVersion = lib.versions.pad 3 finalAttrs.version;
 
   src = fetchFromGitHub {
-    owner = "anthraxx";
-    repo = "linux-hardened";
+    owner = "gregkh";
+    repo = "linux";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-qXLOtG/dPtWD1jvwuMXGpo8vYkdZN52KhCOUFZotu5Y=";
+    hash = "sha256-hfBIYnBMpVVRo6hhcvHF2ZbjhSRDmaprJmarVQ1gqyA=";
   };
 
   strictDeps = true;
@@ -110,8 +110,8 @@ in stdenv.mkDerivation (finalAttrs: {
   ];
 
   patches = [
-    ./io_uring-sysctl.patch
-    ./x86-vdso32-disable-ipra.patch
+    #./io_uring-sysctl.patch
+    #./x86-vdso32-disable-ipra.patch
   ] ++ (lib.fileset.fileFilter (file: file.hasExt "patch") ./ubuntu |> lib.fileset.toList);
 
   enableParallelBuilding = true;
