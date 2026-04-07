@@ -17,7 +17,7 @@
 
     JUMP_LABEL = true;
 
-    #LTO_CLANG_FULL = true;
+    LTO_CLANG_FULL = true;
   };
 
   boot = {
@@ -174,7 +174,7 @@
     DEBUG_FS = false;
 
     # Undefined behaviour sanitiser
-    UBSAN = false;
+    UBSAN = true;
 
     # User page table sanity checks
     PAGE_TABLE_CHECK = false;
@@ -182,8 +182,8 @@
 
     # Memory safety error detection
     KFENCE = false;
-    #KFENCE_DEFERRABLE = true;
-    #KFENCE_BUG_ON_DATA_CORRUPTION = true;
+    KFENCE_DEFERRABLE = true;
+    KFENCE_BUG_ON_DATA_CORRUPTION = true;
 
     PANIC_ON_OOPS = true;
     PANIC_TIMEOUT = (-1);
@@ -204,8 +204,8 @@
     LOCK_DOWN_KERNEL_FORCE_CONFIDENTIALITY = true;
     SECURITY_LANDLOCK = true;
 
-    #LIST_HARDENED = true;
-    #BUG_ON_DATA_CORRUPTION = true;
+    LIST_HARDENED = true;
+    BUG_ON_DATA_CORRUPTION = true;
 
   } // lib.optionalAttrs hostPlatform.isx86_64 {
     X86_UMIP = true;
