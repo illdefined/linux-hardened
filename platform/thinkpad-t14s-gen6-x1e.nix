@@ -54,7 +54,6 @@
     KVM = true;
 
     SCHED_SMT = false;
-    #SHADOW_CALL_STACK = true;
 
     BT_HCIUART = true;
     BT_HCIUART_QCA = true;
@@ -88,7 +87,7 @@
 
     INPUT_MOUSEDEV = true;
 
-    #KEYBOARD_ATKBD = false;
+    KEYBOARD_ATKBD = false;
     KEYBOARD_GPIO = true;
 
     INPUT_MOUSE = true;
