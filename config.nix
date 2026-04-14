@@ -182,8 +182,8 @@
 
     # Memory safety error detection
     KFENCE = false;
-    KFENCE_DEFERRABLE = true;
-    KFENCE_BUG_ON_DATA_CORRUPTION = true;
+    #KFENCE_DEFERRABLE = true;
+    #KFENCE_BUG_ON_DATA_CORRUPTION = true;
 
     PANIC_ON_OOPS = true;
     PANIC_TIMEOUT = (-1);
