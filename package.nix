@@ -77,7 +77,7 @@ in stdenv.mkDerivation (finalAttrs: {
   __structuredAttrs = true;
 
   pname = "linux";
-  version = "7.0-rc6";
+  version = "7.0";
 
   modDirVersion = lib.versions.pad 3 finalAttrs.version;
 
@@ -85,7 +85,7 @@ in stdenv.mkDerivation (finalAttrs: {
     owner = "gregkh";
     repo = "linux";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-hfBIYnBMpVVRo6hhcvHF2ZbjhSRDmaprJmarVQ1gqyA=";
+    hash = "sha256-7TjYHhJdD67P3lquusrjjVtUIUzhLPtA5Oy7tc82gYA=";
   };
 
   strictDeps = true;
