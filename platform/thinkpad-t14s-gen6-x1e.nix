@@ -175,6 +175,10 @@
     MMC_SDHCI_PLTFM = true;
     MMC_SDHCI_MSM = true;
 
+    SCSI_UFSHCD = true;
+    SCSI_UFSHCD_PLATFORM = true;
+    SCSI_UFS_QCOM = true;
+
     LEDS_QCOM_FLASH = true;
     LEDS_QCOM_LPG = true;
 
@@ -258,6 +262,7 @@
     PHY_QCOM_EDP = true;
     PHY_QCOM_MIPI_CSI2 = true;
     PHY_QCOM_QMP = true;
+    PHY_QCOM_QMP_UFS = true;
     PHY_QCOM_EUSB2_REPEATER = true;
 
     MUX_GPIO = true;
