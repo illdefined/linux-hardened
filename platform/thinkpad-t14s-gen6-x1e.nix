@@ -262,7 +262,10 @@
     PHY_QCOM_EDP = true;
     PHY_QCOM_MIPI_CSI2 = true;
     PHY_QCOM_QMP = true;
+    PHY_QCOM_QMP_COMBO = true;
+    PHY_QCOM_QMP_PCIE = true;
     PHY_QCOM_QMP_UFS = true;
+    PHY_QCOM_QMP_USB = true;
     PHY_QCOM_EUSB2_REPEATER = true;
 
     MUX_GPIO = true;
