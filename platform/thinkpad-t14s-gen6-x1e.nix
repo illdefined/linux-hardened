@@ -342,10 +342,6 @@
 
     I2C_HID_OF_ELAN = true;
 
-    SCSI_UFSHCD = true;
-    SCSI_UFSHCD_PLATFORM = true;
-    SCSI_UFS_QCOM = true;
-
     QCOM_IOMMU = true;
 
     QCOM_SPMI_ADC5 = true;
