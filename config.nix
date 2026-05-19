@@ -112,8 +112,6 @@
     CPU_SUP_ZHAOXIN = false;
   } // lib.optionalAttrs hostPlatform.isAarch64 {
     ARM64_VA_BITS_48 = true;
-    ARM64_PAN = true;
-    ARM64_USE_LSE_ATOMICS = true;
     ARM64_CNP = true;
     ARM64_PTR_AUTH = true;
     ARM64_EPAN = true;
@@ -148,7 +146,6 @@
     SLAB_FREELIST_HARDENED = true;
     SLAB_BUCKETS = true;
     SLAB_CANARY = true;
-    SLUB_CPU_PARTIAL = true;
     RANDOM_KMALLOC_CACHES = true;
 
     # Page allocator
