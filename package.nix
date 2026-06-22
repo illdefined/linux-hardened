@@ -24,6 +24,10 @@ lib.makeOverridable ({
   extraFirmware ? [ ],
   platformProfiles ? { },
   extraProfiles ? { },
+  target ? with stdenv.hostPlatform;
+    if isAarch64 || isRiscV then "Image"
+    else if isx86 then "bzImage"
+    else "vmlinux",
   buildDTBs ? with stdenv.hostPlatform; isAarch || isRiscV,
   ...
 }:
@@ -243,8 +247,7 @@ in stdenv.mkDerivation (finalAttrs: {
 
     LIBCLANG_PATH = lib.getLib llvmPackages.libclang + "/lib";
     RUST_LIB_SRC = pkgsBuildHost.rustPlatform.rustLibSrc;
-  } // lib.optionalAttrs (hostPlatform ? linux-kernel.target) {
-    KBUILD_IMAGE = hostPlatform.linux-kernel.target;
+    KBUILD_IMAGE = target;
   };
 
   inherit platformFirmware extraFirmware;
@@ -374,7 +377,7 @@ in stdenv.mkDerivation (finalAttrs: {
   '';
 
   buildFlags = [
-    hostPlatform.linux-kernel.target
+    target
   ] ++ lib.optionals buildDTBs [
     "dtbs"
   ];
@@ -407,7 +410,7 @@ in stdenv.mkDerivation (finalAttrs: {
   '';
 
   passthru = {
-    inherit buildDTBs;
+    inherit target buildDTBs;
 
     config = with kernel; {
       isSet = option: hasAttr option config;
