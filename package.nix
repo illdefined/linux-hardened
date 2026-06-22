@@ -24,6 +24,7 @@ lib.makeOverridable ({
   extraFirmware ? [ ],
   platformProfiles ? { },
   extraProfiles ? { },
+  buildDTBs ? with stdenv.hostPlatform; isAarch || isRiscV,
   ...
 }:
 
@@ -374,7 +375,7 @@ in stdenv.mkDerivation (finalAttrs: {
 
   buildFlags = [
     hostPlatform.linux-kernel.target
-  ] ++ lib.optionals hostPlatform.linux-kernel.DTB or false [
+  ] ++ lib.optionals buildDTBs [
     "dtbs"
   ];
 
@@ -396,7 +397,7 @@ in stdenv.mkDerivation (finalAttrs: {
   installTargets = [
     "install"
     "modules_install"
-  ] ++ lib.optionals hostPlatform.linux-kernel.DTB or false [
+  ] ++ lib.optionals buildDTBs [
     "dtbs_install"
   ];
 
@@ -406,6 +407,8 @@ in stdenv.mkDerivation (finalAttrs: {
   '';
 
   passthru = {
+    inherit buildDTBs;
+
     config = with kernel; {
       isSet = option: hasAttr option config;
       getValue = option: if hasAttr option config
