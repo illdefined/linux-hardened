@@ -146,7 +146,7 @@
     SLAB_FREELIST_HARDENED = true;
     SLAB_BUCKETS = true;
     SLAB_CANARY = true;
-    RANDOM_KMALLOC_CACHES = true;
+    KMALLOC_PARTITION_CACHES = true;
 
     # Page allocator
     SHUFFLE_PAGE_ALLOCATOR = true;
@@ -324,7 +324,6 @@
     TRANSPARENT_HUGEPAGE_MADVISE = true;
     TRANSPARENT_HUGEPAGE_SHMEM_HUGE_WITHIN_SIZE = true;
     TRANSPARENT_HUGEPAGE_TMPFS_HUGE_WITHIN_SIZE = true;
-    READ_ONLY_THP_FOR_FS = true;
     HUGETLBFS = true;
     HUGETLB_PAGE_OPTIMIZE_VMEMMAP = option true;
     HUGETLB_PAGE_OPTIMIZE_VMEMMAP_DEFAULT_ON = option true;
@@ -416,7 +415,6 @@
     PCIEAER = true;
     PCIE_DPC = true;
     PCI_MSI = true;
-    PCIE_BUS_PERFORMANCE = true;
 
     HID_SUPPORT = true;
     HID = true;
