@@ -448,7 +448,6 @@ in stdenv.mkDerivation (finalAttrs: {
   meta = {
     homepage = "https://github.com/anthraxx/linux-hardened";
     license = lib.licenses.gpl2Only;
-    maintainers = with lib.maintainers; [ mvs ];
     platforms = [ "riscv64-linux" "aarch64-linux" "x86_64-linux" ];
 
   };
