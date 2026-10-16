@@ -80,7 +80,7 @@ in stdenv.mkDerivation (finalAttrs: {
   __structuredAttrs = true;
 
   pname = "linux-hardened";
-  version = "7.2.8-hardened1";
+  version = "7.2.10-hardened1";
 
   modDirVersion = lib.versions.pad 3 finalAttrs.version;
 
@@ -88,7 +88,7 @@ in stdenv.mkDerivation (finalAttrs: {
     owner = "anthraxx";
     repo = "linux-hardened";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-VFHniSeD1IPk0949roMZ56h9rFXvkqn+W4nbdaQRvDo=";
+    hash = "sha256-3VYkwQNVp42HjQDPCAch3qPFDZgkh3i8CjC8wUwZses=";
   };
 
   strictDeps = true;
